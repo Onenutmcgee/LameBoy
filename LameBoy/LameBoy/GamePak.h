@@ -18,6 +18,8 @@ public:
 	// Method used to load the rom from the given path
 	void Load(const std::string& rom);
 
+	BYTE ReadByte(WORD address);
+
 	void DumpToCout();
 	std::string Title();
 	int CartType();
@@ -26,6 +28,11 @@ public:
 	bool GamePakIsLoaded;
 
 private:
+	const WORD ROM_BANK_0_CUTOFF = 0x4000;
+	const WORD ROM_BANK_SWITCH_CUTTOFF = 0x8000;
+	const WORD RAM_BANK_OFFSET = 0xA000;
+
 	BYTE* _cartMemArray;
+	WORD _currentRomBank = 1;
 };
 

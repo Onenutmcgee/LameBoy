@@ -27,7 +27,7 @@
     <ClCompile Include="Registers.cpp">
       <Filter>Source Files\Emulator</Filter>
     </ClCompile>
-    <ClCompile Include="MMU.cpp">
+    <ClCompile Include="MemoryManager.cpp">
       <Filter>Source Files\Emulator</Filter>
     </ClCompile>
     <ClCompile Include="CPU.cpp">
@@ -41,7 +41,7 @@
     <ClInclude Include="Registers.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MMU.h">
+    <ClInclude Include="MemoryManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CPU.h">

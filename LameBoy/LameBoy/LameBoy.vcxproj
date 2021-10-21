@@ -142,13 +142,13 @@
     <ClCompile Include="CPU.cpp" />
     <ClCompile Include="GamePak.cpp" />
     <ClCompile Include="LameBoy.cpp" />
-    <ClCompile Include="MMU.cpp" />
+    <ClCompile Include="MemoryManager.cpp" />
     <ClCompile Include="Registers.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CPU.h" />
     <ClInclude Include="GamePak.h" />
-    <ClInclude Include="MMU.h" />
+    <ClInclude Include="MemoryManager.h" />
     <ClInclude Include="Registers.h" />
     <ClInclude Include="Translator.h" />
     <ClInclude Include="TypeDefs.h" />

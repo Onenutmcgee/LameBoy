@@ -54,6 +54,20 @@ void GamePak::Load(const std::string &rom)
 	this->GamePakIsLoaded = true;
 }
 
+BYTE GamePak::ReadByte(WORD address)
+{
+	if (address < ROM_BANK_0_CUTOFF) // Address is in bank 0
+		return _cartMemArray[address];
+
+	//TODO: ROM bank and RAM bank switching
+	if (address < ROM_BANK_SWITCH_CUTTOFF) // Address is in switchable bank.  Add the cutoff multiple
+		return _cartMemArray[address + (_currentRomBank - 1) * ROM_BANK_0_CUTOFF];
+	
+	// address is in RAM bank
+	// I have not implemented onboard RAM yet
+	return 0;
+}
+
 std::string GamePak::Title()
 {
 	if (!this->GamePakIsLoaded)
