@@ -4,14 +4,29 @@
 #include <iostream>
 
 #include "GamePak.h"
+#include "CPU.h"
 #include "Translator.h"
+#include <iomanip>
+
 
 int main()
 {
     GamePak game("c:\\data\\tetris.gb");
 
-    std::cout << game.Title() << '\n' << Translator::CartType(game.CartType());
+    std::cout << game.Title() << '\n' << Translator::CartType(game.CartType()) << '\n';
+
+    CPU* cp = new CPU(&game);
+    BYTE cycles;
     
+    while (1 == 1)
+    {
+        opcode op = cp->PeekNextOpcode();
+        std::cout << "0x" << std::setw(2) << std::setfill('0') << std::hex << +(op.code) << " " << op.disassembly << '\n';
+
+        cp->ExecuteNextOpcode(&cycles);
+
+        std::cout << cycles << " cycles used.\n";
+    }
     //game.DumpToCout();
 
   /*  int i;
