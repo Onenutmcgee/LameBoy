@@ -19,6 +19,7 @@ public:
 	void Load(const std::string& rom);
 
 	BYTE ReadByte(WORD address);
+	void WriteByte(WORD address, BYTE value);
 
 	void DumpToCout();
 	std::string Title();

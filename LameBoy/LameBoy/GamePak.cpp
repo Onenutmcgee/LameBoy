@@ -68,6 +68,13 @@ BYTE GamePak::ReadByte(WORD address)
 	return 0;
 }
 
+void GamePak::WriteByte(WORD address, BYTE value)
+{
+	//TODO: Proper logic and writing to RAM banks
+	//TODO: Ram banks
+
+}
+
 std::string GamePak::Title()
 {
 	if (!this->GamePakIsLoaded)

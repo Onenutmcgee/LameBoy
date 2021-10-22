@@ -71,3 +71,30 @@ BYTE MemoryManager::ReadByte(WORD address)
 	// This will need to be tweaked for I/O, but for now, we'll just dump it all here
 	return _upperMemory[address - UPPER_MEM_OFFSET];
 }
+
+void MemoryManager::WriteByte(WORD address, BYTE value)
+{
+	// There is some switching that needs to be done here depending on the address
+	// TODO: Handle special ROM writes and RAM protection
+
+	if (address < CART_RAM_OFFSET) // this is a write to VRAM
+	{
+		_vram[address - VRAM_OFFSET] = value;
+	}
+	if (address < RAM_OFFSET) // This is a write to the cart RAM
+	{
+		_cart->WriteByte(address, value);
+	}
+	else if (address < RAM_ECHO_OFFSET) // this is a write to internal RAM
+	{
+		_ram[address - RAM_OFFSET] = value;
+	}
+	else if (address < UPPER_MEM_OFFSET) // this is a write to the echo
+	{
+		_ram[address - RAM_ECHO_OFFSET] = value;
+	}
+	else // this is a write to the upper memory
+	{
+		_upperMemory[address - UPPER_MEM_OFFSET] = value;
+	}
+}
