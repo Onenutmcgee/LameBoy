@@ -19,6 +19,15 @@
     <Filter Include="Source Files\Shell">
       <UniqueIdentifier>{25a88c31-7889-43c5-a3a6-02b30adfc633}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Emulator">
+      <UniqueIdentifier>{ea011b88-2968-4e41-9ca0-d152bca86f8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Shell">
+      <UniqueIdentifier>{4a38c0cb-8fc0-486e-bf39-db684161b534}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Exceptions">
+      <UniqueIdentifier>{4591e4a3-e41c-448d-93fc-e3f620a4d895}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LameBoy.cpp">
@@ -40,6 +49,9 @@
       <Filter>Source Files\Emulator</Filter>
     </ClCompile>
     <ClCompile Include="OpExecutors.cpp">
+      <Filter>Source Files\Emulator</Filter>
+    </ClCompile>
+    <ClCompile Include="opcode.cpp">
       <Filter>Source Files\Emulator</Filter>
     </ClCompile>
   </ItemGroup>
@@ -70,6 +82,9 @@
     </ClInclude>
     <ClInclude Include="JumpTableLinker.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OpcodeNotImplementedException.h">
+      <Filter>Header Files\Exceptions</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

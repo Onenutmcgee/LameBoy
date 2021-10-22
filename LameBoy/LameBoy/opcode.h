@@ -2,15 +2,24 @@
 #include "TypeDefs.h"
 #include "OpExecutors.h"
 
-class OpExecutor;
+class CPU;
 
-struct opcode {
+namespace OPC
+{
+	bool exe_nop(CPU* cp);
+
+	struct opcode {
+
+		WORD code;
+		const char* disassembly;
+		BYTE operandLength;
+		BYTE cyles;
+		BYTE branchedCycles;
+		const char* flagInfo;
+		bool (*execute)(CPU*);
+	};
+
+	extern struct opcode opcodes[];
+
 	
-	WORD code;
-	const char* disassembly;
-	BYTE operandLength;
-	BYTE cyles;
-	BYTE branchedCycles;
-	const char* flagInfo;
-	OpExecutor* executor;
-};
+}

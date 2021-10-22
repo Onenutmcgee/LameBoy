@@ -143,6 +143,7 @@
     <ClCompile Include="GamePak.cpp" />
     <ClCompile Include="LameBoy.cpp" />
     <ClCompile Include="MemoryManager.cpp" />
+    <ClCompile Include="opcode.cpp" />
     <ClCompile Include="OpcodeImpl.cpp" />
     <ClCompile Include="OpExecutors.cpp" />
     <ClCompile Include="Registers.cpp" />
@@ -151,6 +152,7 @@
     <ClInclude Include="CPU.h" />
     <ClInclude Include="GamePak.h" />
     <ClInclude Include="JumpTableLinker.h" />
+    <ClInclude Include="OpcodeNotImplementedException.h" />
     <ClInclude Include="OpExecutors.h" />
     <ClInclude Include="MemoryManager.h" />
     <ClInclude Include="opcode.h" />

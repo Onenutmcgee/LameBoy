@@ -1,5 +1,6 @@
 #include "CPU.h"
 #include "JumpTableLinker.h"
+#include "OpcodeNotImplementedException.h"
 
 CPU::CPU(GamePak* cart)
 {
@@ -7,18 +8,18 @@ CPU::CPU(GamePak* cart)
 	this->_mem = new MemoryManager(cart);
 
 	JumpTableLinker link;
-	link.LinkOpcodesToExecutors(opcodes);
+	link.LinkOpcodesToExecutors(OPC::opcodes);
 
 	Initialize();
 }
 
 CPU::~CPU()
 {
-	for(opcode op : opcodes)
+	/*for(opcode op : opcodes)
 	{
 		if (op.executor)
 			delete op.executor;
-	}
+	}*/
 	delete _mem;
 }
 
@@ -38,15 +39,15 @@ void CPU::Reset()
 	Initialize();
 }
 
-opcode CPU::ExecuteNextOpcode(BYTE* cycles)
+OPC::opcode CPU::ExecuteNextOpcode(BYTE* cycles)
 {
 	BYTE op = _mem->ReadByte(reg.pc);
 	reg.pc++;
 
-	opcode code = opcodes[op];
+	OPC::opcode code = OPC::opcodes[op];
 	
 	// TODO: Remove this NULL check
-	if (code.executor)
+	/*if (code.executor)
 	{
 		if (code.executor->execute(this))
 		{
@@ -59,14 +60,19 @@ opcode CPU::ExecuteNextOpcode(BYTE* cycles)
 	}
 	else
 	{
-		exit(op);
-	}
+		throw OpcodeNotImplException(code);
+	}*/
 	
 	return code;
 }
 
-opcode CPU::PeekNextOpcode()
+OPC::opcode CPU::PeekNextOpcode()
 {
 	BYTE op = _mem->ReadByte(reg.pc);
-	return opcodes[op];
+	return OPC::opcodes[op];
+}
+
+void CPU::SetFlag(BYTE flag)
+{
+	reg.f |= (1 << flag);
 }

@@ -8,6 +8,8 @@
 #include "Translator.h"
 #include <iomanip>
 
+#include "OpcodeNotImplementedException.h"
+
 
 int main()
 {
@@ -18,14 +20,24 @@ int main()
     CPU* cp = new CPU(&game);
     BYTE cycles;
     
-    while (1 == 1)
+    try
     {
-        opcode op = cp->PeekNextOpcode();
-        std::cout << "0x" << std::setw(2) << std::setfill('0') << std::hex << +(op.code) << " " << op.disassembly << '\n';
 
-        cp->ExecuteNextOpcode(&cycles);
+        while (1 == 1)
+        {
+            OPC::opcode op = cp->PeekNextOpcode();
+            std::cout << "PC: 0x" << std::setw(4) << std::setfill('0') << std::hex << +(cp->reg.pc) << "   0x" << std::setw(2) << std::setfill('0') << std::hex << +(op.code) << " " << op.disassembly << '\n';
 
-        std::cout << cycles << " cycles used.\n";
+            cp->ExecuteNextOpcode(&cycles);
+
+        }
+    }
+    catch(const OpcodeNotImplException& ex)
+    {
+        std::cout << ex.what() << "\n0x" << std::setw(2) << std::setfill('0') << std::hex << +(ex.op.code) << " - " << ex.op.disassembly << "  " << +(ex.op.cyles) << "|" << +(ex.op.branchedCycles) 
+            << "  FL: " << ex.op.flagInfo <<'\n';
+
+        exit(-1);
     }
     //game.DumpToCout();
 

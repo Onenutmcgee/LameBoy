@@ -13,6 +13,8 @@ public:
 	void Initialize();
 
 	BYTE ReadByte(WORD);
+	WORD ReadWord(WORD);
+
 	void WriteByte(WORD, BYTE);
 
 

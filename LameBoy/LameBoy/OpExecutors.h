@@ -1,7 +1,8 @@
 #pragma once
-#include "CPU.h"
-
 class CPU;
+
+	
+
 
 class OpExecutor
 {
@@ -15,3 +16,23 @@ class NOP_Executor : public OpExecutor
 public:
 	bool execute(CPU* cp);
 };
+
+class JP_u16_Executor : public OpExecutor
+{
+public:
+	bool execute(CPU* cp);
+};
+
+class XOR_a_Executor : public OpExecutor
+{
+public:
+	bool execute(CPU* cp);
+};
+
+class LD_hl_u16_Executor : public OpExecutor
+{
+public:
+	bool execute(CPU* cp);
+};
+
+
