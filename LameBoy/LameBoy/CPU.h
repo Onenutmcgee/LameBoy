@@ -3,8 +3,7 @@
 #include "GamePak.h"
 #include "Registers.h"
 #include "TypeDefs.h"
-
-
+#include "opcode.h"
 
 class CPU
 {
@@ -18,13 +17,17 @@ public:
 	void Reset();
 	opcode ExecuteNextOpcode(BYTE*);
 	opcode PeekNextOpcode();
+	
+	bool nop();
 
 private:
 	MemoryManager* _mem;
 	GamePak* _cart;
+	
+	void linkOpCodes();
 
-	const struct opcode opcodes[256] = {
-		{ 0x00, "NOP"		, 1, 1, 1, "----", NULL },
+	struct opcode opcodes[256] = {
+		{ 0x00, "NOP"		, 1, 1, 1, "----" , NULL },
 		{ 0x01, "LD BC,u16"	, 3, 3, 3, "----", NULL },
 		{ 0x02, "LD (BC),A"	, 1, 2, 2, "----", NULL },
 		{ 0x03, "INC BC"	, 1, 2, 2, "----", NULL },

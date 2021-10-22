@@ -1,5 +1,4 @@
 #pragma once
-#include <functional>
 
 typedef unsigned char BYTE;
 typedef char SIGNED_BYTE;
@@ -18,12 +17,3 @@ typedef signed short SIGNED_WORD;
 #define CART_TYPE_MBC2_BATT			6
 #define CART_TYPE_ROM_RAM			9
 
-struct opcode {
-	WORD code;
-	const char* disassembly;
-	BYTE operandLength;
-	BYTE cyles;
-	BYTE branchedCycles;
-	const char* flagInfo;
-	std::function<bool()> execute;
-};

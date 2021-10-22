@@ -1,14 +1,24 @@
 #include "CPU.h"
+#include "JumpTableLinker.h"
 
 CPU::CPU(GamePak* cart)
 {
 	this->_cart = cart;
 	this->_mem = new MemoryManager(cart);
+
+	JumpTableLinker link;
+	link.LinkOpcodesToExecutors(opcodes);
+
 	Initialize();
 }
 
 CPU::~CPU()
 {
+	for(opcode op : opcodes)
+	{
+		if (op.executor)
+			delete op.executor;
+	}
 	delete _mem;
 }
 
@@ -36,9 +46,9 @@ opcode CPU::ExecuteNextOpcode(BYTE* cycles)
 	opcode code = opcodes[op];
 	
 	// TODO: Remove this NULL check
-	if (code.execute)
+	if (code.executor)
 	{
-		if (code.execute())
+		if (code.executor->execute(this))
 		{
 			*cycles = code.branchedCycles;
 		}
@@ -51,7 +61,7 @@ opcode CPU::ExecuteNextOpcode(BYTE* cycles)
 	{
 		exit(op);
 	}
-
+	
 	return code;
 }
 
