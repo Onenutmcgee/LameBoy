@@ -32,13 +32,30 @@ public:
 	bool xor_a_addr(WORD);
 
 	// 16 bit loads
-	bool ld_hl_u16();
+	bool ld_immediate_u16_dest(WORD*);
 
 	// 8 bit loads
+	bool ld_immediate_u8_dest(BYTE*);
+
+	// TODO: replace the individual register writes with more generic calls
+	/*
+	bool ld_reg_val(BYTE* dest, BYTE val);
+	bool ld_reg_addr(BYTE* dest, WORD address);
+	*/
 	bool ld_a_val(BYTE);
 	bool ld_a_addr(WORD);
 	bool ld_b_val(BYTE);
 	bool ld_b_addr(WORD);
+	bool ld_c_val(BYTE);
+	bool ld_c_addr(WORD);
+	bool ld_d_val(BYTE);
+	bool ld_d_addr(WORD);
+	bool ld_e_val(BYTE);
+	bool ld_e_addr(WORD);
+	bool ld_h_val(BYTE);
+	bool ld_h_addr(WORD);
+	bool ld_l_val(BYTE);
+	bool ld_l_addr(WORD);
 
 
 private:

@@ -11,11 +11,6 @@ CPU::CPU(GamePak* cart)
 
 CPU::~CPU()
 {
-	/*for(opcode op : opcodes)
-	{
-		if (op.executor)
-			delete op.executor;
-	}*/
 	delete _mem;
 }
 
