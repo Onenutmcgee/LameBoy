@@ -132,3 +132,60 @@ bool CPU::ld_l_addr(WORD address)
 	BYTE val = _mem->ReadByte(address);
 	return ld_l_val(val);
 }
+
+bool CPU::ldd_addr_hl(BYTE val)
+{
+	_mem->WriteByte(reg.hl, val);
+	reg.hl--;
+	return false;
+}
+
+bool CPU::dec_reg(BYTE* regAddr)
+{
+	(*regAddr)--;
+
+	if (*regAddr == 0)
+		SetFlag(FLAG_Z);
+	else
+		ClearFlag(FLAG_Z);
+	SetFlag(FLAG_N);
+
+	// For BYTEs, half carry flag only set when moving from 0xX0 and down ot 0x(x-1)F
+	if ((*regAddr & 0x0F) == 0x0F)
+		SetFlag(FLAG_H);
+	else
+		ClearFlag(FLAG_H);
+
+	return false;
+}
+
+bool CPU::inc_reg(BYTE* regAddr)
+{
+	(*regAddr)++;
+
+	if (*regAddr == 0)
+		SetFlag(FLAG_Z);
+	else
+		ClearFlag(FLAG_Z);
+	ClearFlag(FLAG_N);
+
+	// For BYTEs, half carry flag only set when moving from 0xXF and up
+	if ((*regAddr & 0x0F) == 0x00)
+		SetFlag(FLAG_H);
+	else
+		ClearFlag(FLAG_H);
+
+	return false;
+}
+
+bool CPU::dec_reg(WORD* regAddr)
+{
+	(*regAddr)--;
+	return false;
+}
+
+bool CPU::inc_reg(WORD* regAddr)
+{
+	(*regAddr)++;
+	return false;
+}

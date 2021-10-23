@@ -67,3 +67,9 @@ void CPU::SetFlag(BYTE flag)
 {
 	reg.f |= (1 << flag);
 }
+
+void CPU::ClearFlag(BYTE flag)
+{
+	BYTE t = (1 << flag);
+	reg.f &= ~t;
+}

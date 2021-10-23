@@ -30,6 +30,12 @@ public:
 	// byte ALU
 	bool xor_a_n(BYTE val);
 	bool xor_a_addr(WORD);
+	bool dec_reg(BYTE*);
+	bool inc_reg(BYTE*);
+
+	// word ALU
+	bool dec_reg(WORD*);
+	bool inc_reg(WORD*);
 
 	// 16 bit loads
 	bool ld_immediate_u16_dest(WORD*);
@@ -57,9 +63,12 @@ public:
 	bool ld_l_val(BYTE);
 	bool ld_l_addr(WORD);
 
+	// 8 bit writes
+	bool ldd_addr_hl(BYTE);
 
 private:
 	void SetFlag(BYTE);
+	void ClearFlag(BYTE);
 
 	MemoryManager* _mem;
 	GamePak* _cart;

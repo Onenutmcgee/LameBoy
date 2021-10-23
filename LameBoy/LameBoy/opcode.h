@@ -75,6 +75,9 @@ namespace OPC
 	bool exe_ld_l_h(CPU* cp);
 	bool exe_ld_l_addr_hl(CPU* cp);
 
+	// 8-bit writes
+	bool exe_ldd_hl_a(CPU* cp);
+
 	// 16-bit loads
 	bool exe_ld_hl_u16(CPU* cp);
 	bool exe_ld_bc_u16(CPU* cp);
@@ -91,6 +94,30 @@ namespace OPC
 	bool exe_xor_a_h(CPU* cp);
 	bool exe_xor_a_l(CPU* cp);
 	bool exe_xor_a_addr_hl(CPU* cp);
+
+	bool exe_inc_a(CPU* cp);
+	bool exe_inc_b(CPU* cp);
+	bool exe_inc_c(CPU* cp);
+	bool exe_inc_d(CPU* cp);
+	bool exe_inc_e(CPU* cp);
+	bool exe_inc_h(CPU* cp);
+	bool exe_inc_l(CPU* cp);
+	bool exe_inc_bc(CPU* cp);
+	bool exe_inc_de(CPU* cp);
+	bool exe_inc_hl(CPU* cp);
+	bool exe_inc_sp(CPU* cp);
+
+	bool exe_dec_a(CPU* cp);
+	bool exe_dec_b(CPU* cp);
+	bool exe_dec_c(CPU* cp);
+	bool exe_dec_d(CPU* cp);
+	bool exe_dec_e(CPU* cp);
+	bool exe_dec_h(CPU* cp);
+	bool exe_dec_l(CPU* cp);
+	bool exe_dec_bc(CPU* cp);
+	bool exe_dec_de(CPU* cp);
+	bool exe_dec_hl(CPU* cp);
+	bool exe_dec_sp(CPU* cp);
 
 	struct opcode {
 

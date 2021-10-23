@@ -86,8 +86,11 @@ void MemoryManager::WriteByte(WORD address, BYTE value)
 {
 	// There is some switching that needs to be done here depending on the address
 	// TODO: Handle special ROM writes and RAM protection
-
-	if (address < CART_RAM_OFFSET) // this is a write to VRAM
+	if (address < VRAM_OFFSET)
+	{
+		throw this;
+	}
+	else if (address < CART_RAM_OFFSET) // this is a write to VRAM
 	{
 		_vram[address - VRAM_OFFSET] = value;
 	}
