@@ -1,14 +1,10 @@
 #include "CPU.h"
-#include "JumpTableLinker.h"
 #include "OpcodeNotImplementedException.h"
 
 CPU::CPU(GamePak* cart)
 {
 	this->_cart = cart;
 	this->_mem = new MemoryManager(cart);
-
-	JumpTableLinker link;
-	link.LinkOpcodesToExecutors(OPC::opcodes);
 
 	Initialize();
 }
@@ -47,9 +43,9 @@ OPC::opcode CPU::ExecuteNextOpcode(BYTE* cycles)
 	OPC::opcode code = OPC::opcodes[op];
 	
 	// TODO: Remove this NULL check
-	/*if (code.executor)
+	if (code.execute)
 	{
-		if (code.executor->execute(this))
+		if (code.execute(this))
 		{
 			*cycles = code.branchedCycles;
 		}
@@ -61,7 +57,7 @@ OPC::opcode CPU::ExecuteNextOpcode(BYTE* cycles)
 	else
 	{
 		throw OpcodeNotImplException(code);
-	}*/
+	}
 	
 	return code;
 }

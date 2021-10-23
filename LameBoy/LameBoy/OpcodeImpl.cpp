@@ -5,15 +5,15 @@ bool CPU::nop()
 	return false;
 }
 
-bool CPU::jp_u16()
+bool CPU::jp_addr(WORD address)
 {
-	WORD address = _mem->ReadWord(reg.pc);
-	reg.pc = address;
+	WORD val = _mem->ReadWord(address);
+	reg.pc = val;
 
 	return false;
 }
 
-bool CPU::xor_n(BYTE comp)
+bool CPU::xor_a_n(BYTE comp)
 {
 	reg.a ^= comp;
 
@@ -22,6 +22,12 @@ bool CPU::xor_n(BYTE comp)
 		SetFlag(FLAG_Z);
 
 	return false;
+}
+
+bool CPU::xor_a_addr(WORD address)
+{
+	BYTE val = _mem->ReadByte(address);
+	return xor_a_n(val);
 }
 
 bool CPU::ld_hl_u16()
@@ -33,3 +39,30 @@ bool CPU::ld_hl_u16()
 
 	return false;
 }
+
+bool CPU::ld_a_val(BYTE val)
+{
+	reg.a = val;
+
+	return false;
+}
+
+bool CPU::ld_a_addr(WORD address)
+{
+	BYTE val = _mem->ReadByte(address);
+	return ld_a_val(val);
+}
+
+bool CPU::ld_b_val(BYTE val)
+{
+	reg.a = val;
+
+	return false;
+}
+
+bool CPU::ld_b_addr(WORD address)
+{
+	BYTE val = _mem->ReadByte(address);
+	return ld_a_val(val);
+}
+

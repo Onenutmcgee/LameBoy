@@ -25,13 +25,21 @@ public:
 	bool nop();
 
 	// jumps
-	bool jp_u16();
+	bool jp_addr(WORD);
 
 	// byte ALU
-	bool xor_n(BYTE);
+	bool xor_a_n(BYTE val);
+	bool xor_a_addr(WORD);
 
 	// 16 bit loads
 	bool ld_hl_u16();
+
+	// 8 bit loads
+	bool ld_a_val(BYTE);
+	bool ld_a_addr(WORD);
+	bool ld_b_val(BYTE);
+	bool ld_b_addr(WORD);
+
 
 private:
 	void SetFlag(BYTE);

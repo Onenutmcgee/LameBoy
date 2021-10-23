@@ -48,9 +48,6 @@
     <ClCompile Include="OpcodeImpl.cpp">
       <Filter>Source Files\Emulator</Filter>
     </ClCompile>
-    <ClCompile Include="OpExecutors.cpp">
-      <Filter>Source Files\Emulator</Filter>
-    </ClCompile>
     <ClCompile Include="opcode.cpp">
       <Filter>Source Files\Emulator</Filter>
     </ClCompile>
@@ -74,13 +71,7 @@
     <ClInclude Include="Translator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="OpExecutors.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="opcode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="JumpTableLinker.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="OpcodeNotImplementedException.h">
