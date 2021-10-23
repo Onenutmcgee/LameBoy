@@ -10,7 +10,38 @@ bool CPU::jp_addr(WORD address)
 	WORD val = _mem->ReadWord(address);
 	reg.pc = val;
 
-	return false;
+	return true;
+}
+
+bool CPU::jr_i8()
+{
+	SIGNED_BYTE val = _mem->ReadSignedByte(reg.pc);
+	reg.pc++;
+
+	reg.pc += val;
+
+	return true;
+}
+
+bool CPU::jr_flag_i8(BYTE flag, bool invert)
+{
+	SIGNED_BYTE val = _mem->ReadSignedByte(reg.pc);
+	reg.pc++;
+
+	bool check = TestFlag(flag);
+
+	if (invert)
+		check = !check;
+
+	if (check)
+	{
+		reg.pc += val;
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 bool CPU::xor_a_n(BYTE comp)

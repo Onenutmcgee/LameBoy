@@ -13,7 +13,9 @@ public:
 	void Initialize();
 
 	BYTE ReadByte(WORD);
+	SIGNED_BYTE ReadSignedByte(WORD);
 	WORD ReadWord(WORD);
+	SIGNED_WORD ReadSignedWord(WORD);
 
 	void WriteByte(WORD, BYTE);
 

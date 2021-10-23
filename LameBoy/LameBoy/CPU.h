@@ -23,9 +23,12 @@ public:
 	OPC::opcode PeekNextOpcode();
 	
 	bool nop();
+	bool set_interrupts_enabled(bool);
 
 	// jumps
 	bool jp_addr(WORD);
+	bool jr_i8();
+	bool jr_flag_i8(BYTE flag, bool invert);
 
 	// byte ALU
 	bool xor_a_n(BYTE val);
@@ -69,10 +72,11 @@ public:
 private:
 	void SetFlag(BYTE);
 	void ClearFlag(BYTE);
+	bool TestFlag(BYTE);
 
 	MemoryManager* _mem;
 	GamePak* _cart;
-
+	bool interrupts_enabled = true;
 	
 };
 

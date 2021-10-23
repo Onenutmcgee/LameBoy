@@ -73,3 +73,14 @@ void CPU::ClearFlag(BYTE flag)
 	BYTE t = (1 << flag);
 	reg.f &= ~t;
 }
+
+bool CPU::TestFlag(BYTE flag)
+{
+	return reg.f & (1 << flag);
+}
+
+bool CPU::set_interrupts_enabled(bool val)
+{
+	interrupts_enabled = val;
+	return false;
+}

@@ -19,14 +19,30 @@ int main()
 
     CPU* cp = new CPU(&game);
     BYTE cycles;
+
+    bool skip = true;
+    WORD stopskip = 0x21b;
     
+    if (skip)
+    {
+        std::cout << "Skipping to " << std::hex << stopskip << '\n';
+    }
+
     try
     {
 
         while (1 == 1)
         {
-            OPC::opcode op = cp->PeekNextOpcode();
-            std::cout << "PC: 0x" << std::setw(4) << std::setfill('0') << std::hex << +(cp->reg.pc) << "   0x" << std::setw(2) << std::setfill('0') << std::hex << +(op.code) << " " << op.disassembly << '\n';
+            if (skip && cp->reg.pc >= stopskip)
+            {
+                skip = false;
+            }
+
+            if (!skip)
+            {
+                OPC::opcode op = cp->PeekNextOpcode();
+                std::cout << "PC: 0x" << std::setw(4) << std::setfill('0') << std::hex << +(cp->reg.pc) << "   0x" << std::setw(2) << std::setfill('0') << std::hex << +(op.code) << " " << op.disassembly << '\n';
+            }
 
             cp->ExecuteNextOpcode(&cycles);
 

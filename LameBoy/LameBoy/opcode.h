@@ -6,9 +6,17 @@ class CPU;
 namespace OPC
 {
 	bool exe_nop(CPU* cp);
+	bool exe_di(CPU* cp);
+	bool exe_ei(CPU* cp);
 
 	// jumps
 	bool exe_jp_addr_pc(CPU* cp);
+
+	bool exe_jr_i8(CPU* cp);
+	bool exe_jr_nz_i8(CPU* cp);
+	bool exe_jr_z_i8(CPU* cp);
+	bool exe_jr_nc_i8(CPU* cp);
+	bool exe_jr_c_i8(CPU* cp);
 
 	// 8-bit loads
 	bool exe_ld_a_u8(CPU* cp);

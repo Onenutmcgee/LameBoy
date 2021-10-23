@@ -72,6 +72,11 @@ BYTE MemoryManager::ReadByte(WORD address)
 	return _upperMemory[address - UPPER_MEM_OFFSET];
 }
 
+SIGNED_BYTE MemoryManager::ReadSignedByte(WORD address)
+{
+	return (SIGNED_BYTE)ReadByte(address);
+}
+
 WORD MemoryManager::ReadWord(WORD address)
 {
 	// get MS byte first and shift it 8 bits
@@ -80,6 +85,11 @@ WORD MemoryManager::ReadWord(WORD address)
 	// then read the LS byte
 	val |= ReadByte(address);
 	return val;
+}
+
+SIGNED_WORD MemoryManager::ReadSignedWord(WORD address)
+{
+	return (SIGNED_WORD)ReadWord(address);
 }
 
 void MemoryManager::WriteByte(WORD address, BYTE value)
