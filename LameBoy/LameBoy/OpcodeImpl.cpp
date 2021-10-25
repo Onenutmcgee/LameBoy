@@ -63,8 +63,7 @@ bool CPU::xor_a_addr(WORD address)
 
 bool CPU::ld_immediate_u16_dest(WORD* dest)
 {
-	WORD val = _mem->ReadWord(reg.pc);
-	reg.pc += 2;
+	WORD val = FetchNextImmediateWord();
 
 	*dest = val;
 
@@ -73,8 +72,7 @@ bool CPU::ld_immediate_u16_dest(WORD* dest)
 
 bool CPU::ld_immediate_u8_dest(BYTE* dest)
 {
-	BYTE val = _mem->ReadByte(reg.pc);
-	reg.pc++;
+	BYTE val = FetchNextImmediateByte();
 
 	*dest = val;
 	return false;
@@ -169,6 +167,32 @@ bool CPU::ldd_addr_hl(BYTE val)
 	_mem->WriteByte(reg.hl, val);
 	reg.hl--;
 	return false;
+}
+
+bool CPU::ldi_addr_hl(BYTE val)
+{
+	_mem->WriteByte(reg.hl, val);
+	reg.hl++;
+	return false;
+}
+
+bool CPU::ld_addr_val(WORD address, BYTE val)
+{
+	_mem->WriteByte(address, val);
+	return false;
+}
+
+bool CPU::ld_addr_immediate_u8(WORD address)
+{
+	BYTE val = FetchNextImmediateByte();
+	_mem->WriteByte(address, val);
+	return false;
+}
+
+bool CPU::ld_immediate_u16_addr_val(BYTE val)
+{
+	WORD address = FetchNextImmediateWord();
+	return ld_addr_val(address, val);
 }
 
 bool CPU::dec_reg(BYTE* regAddr)

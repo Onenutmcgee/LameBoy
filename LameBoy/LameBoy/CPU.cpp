@@ -57,6 +57,20 @@ OPC::opcode CPU::ExecuteNextOpcode(BYTE* cycles)
 	return code;
 }
 
+BYTE CPU::FetchNextImmediateByte()
+{
+	BYTE val = _mem->ReadByte(reg.pc);
+	reg.pc++;
+	return val;
+}
+
+WORD CPU::FetchNextImmediateWord()
+{
+	WORD val = _mem->ReadWord(reg.pc);
+	reg.pc += 2;
+	return val;
+}
+
 OPC::opcode CPU::PeekNextOpcode()
 {
 	BYTE op = _mem->ReadByte(reg.pc);

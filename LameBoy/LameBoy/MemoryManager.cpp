@@ -118,6 +118,10 @@ void MemoryManager::WriteByte(WORD address, BYTE value)
 	}
 	else // this is a write to the upper memory
 	{
+		// TODO: fix this.  for now, this prevents writing to 0xFF00, which is the joypad byte
+		if (address == 0xFF00)
+			return;
+
 		_upperMemory[address - UPPER_MEM_OFFSET] = value;
 	}
 }

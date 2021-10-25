@@ -85,6 +85,23 @@ namespace OPC
 
 	// 8-bit writes
 	bool exe_ldd_hl_a(CPU* cp);
+	bool exe_ldi_hl_a(CPU* cp);
+
+	bool exe_ld_hl_a(CPU* cp);
+	bool exe_ld_hl_b(CPU* cp);
+	bool exe_ld_hl_c(CPU* cp);
+	bool exe_ld_hl_d(CPU* cp);
+	bool exe_ld_hl_e(CPU* cp);
+	bool exe_ld_hl_h(CPU* cp);
+	bool exe_ld_hl_l(CPU* cp);
+
+	bool exe_ld_immediate_u16_a(CPU* cp);
+	bool exe_ld_bc_a(CPU* cp);
+	bool exe_ld_de_a(CPU* cp);
+
+
+	bool exe_ld_addr_hl_u8(CPU* cp);
+	
 
 	// 16-bit loads
 	bool exe_ld_hl_u16(CPU* cp);

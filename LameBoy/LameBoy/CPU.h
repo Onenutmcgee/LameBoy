@@ -68,11 +68,18 @@ public:
 
 	// 8 bit writes
 	bool ldd_addr_hl(BYTE);
+	bool ldi_addr_hl(BYTE);
+	bool ld_addr_val(WORD address, BYTE val);
+	bool ld_addr_immediate_u8(WORD address);
+	bool ld_immediate_u16_addr_val(BYTE val);
 
 private:
 	void SetFlag(BYTE);
 	void ClearFlag(BYTE);
 	bool TestFlag(BYTE);
+
+	BYTE FetchNextImmediateByte();
+	WORD FetchNextImmediateWord();
 
 	MemoryManager* _mem;
 	GamePak* _cart;
