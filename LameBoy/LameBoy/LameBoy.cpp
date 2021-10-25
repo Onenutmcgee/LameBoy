@@ -10,6 +10,7 @@
 
 #include "OpcodeNotImplementedException.h"
 
+#define dohax true
 
 int main()
 {
@@ -21,8 +22,14 @@ int main()
     BYTE cycles;
 
     bool skip = true;
-    WORD stopskip = 0x21b;
+    WORD stopskip = 0x2a0;
     
+    if (dohax)
+    {
+        // set 0xff44 to 0x94 so that we can continue loading without PPU emulation
+        cp->ld_addr_val(0xff44, 0x94);
+    }
+
     if (skip)
     {
         std::cout << "Skipping to " << std::hex << stopskip << '\n';
