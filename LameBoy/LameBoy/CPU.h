@@ -31,8 +31,12 @@ public:
 	bool jr_flag_i8(BYTE flag, bool invert);
 
 	// byte ALU
-	bool xor_a_n(BYTE val);
+	bool xor_a_val(BYTE val);
 	bool xor_a_addr(WORD);
+	bool or_a_val(BYTE val);
+	bool or_a_addr(WORD address);
+	bool and_a_val(BYTE val);
+	bool and_a_addr(WORD address);
 	bool dec_reg(BYTE*);
 	bool inc_reg(BYTE*);
 

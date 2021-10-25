@@ -110,8 +110,6 @@ namespace OPC
 	bool exe_ld_ff00_immediate_u8_a(CPU* cp);
 	bool exe_ld_ff00_c_a(CPU* cp);
 
-	
-
 	// 16-bit loads
 	bool exe_ld_hl_u16(CPU* cp);
 	bool exe_ld_bc_u16(CPU* cp);
@@ -129,6 +127,27 @@ namespace OPC
 	bool exe_xor_a_l(CPU* cp);
 	bool exe_xor_a_addr_hl(CPU* cp);
 
+	// AND
+	bool exe_and_a_a(CPU* cp);
+	bool exe_and_a_b(CPU* cp);
+	bool exe_and_a_c(CPU* cp);
+	bool exe_and_a_d(CPU* cp);
+	bool exe_and_a_e(CPU* cp);
+	bool exe_and_a_h(CPU* cp);
+	bool exe_and_a_l(CPU* cp);
+	bool exe_and_a_addr_hl(CPU* cp);
+
+	// or
+	bool exe_or_a_a(CPU* cp);
+	bool exe_or_a_b(CPU* cp);
+	bool exe_or_a_c(CPU* cp);
+	bool exe_or_a_d(CPU* cp);
+	bool exe_or_a_e(CPU* cp);
+	bool exe_or_a_h(CPU* cp);
+	bool exe_or_a_l(CPU* cp);
+	bool exe_or_a_addr_hl(CPU* cp);
+
+	// INC
 	bool exe_inc_a(CPU* cp);
 	bool exe_inc_b(CPU* cp);
 	bool exe_inc_c(CPU* cp);
@@ -141,6 +160,7 @@ namespace OPC
 	bool exe_inc_hl(CPU* cp);
 	bool exe_inc_sp(CPU* cp);
 
+	// DEC
 	bool exe_dec_a(CPU* cp);
 	bool exe_dec_b(CPU* cp);
 	bool exe_dec_c(CPU* cp);

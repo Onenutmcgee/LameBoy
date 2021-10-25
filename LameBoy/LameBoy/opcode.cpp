@@ -475,42 +475,124 @@ bool OPC::exe_ld_sp_u16(CPU* cp)
 // XOR
 bool OPC::exe_xor_a_a(CPU* cp)
 {
-	return cp->xor_a_n(cp->reg.a);
+	return cp->xor_a_val(cp->reg.a);
 }
 
 bool OPC::exe_xor_a_b(CPU* cp)
 {
-	return cp->xor_a_n(cp->reg.b);
+	return cp->xor_a_val(cp->reg.b);
 }
 
 bool OPC::exe_xor_a_c(CPU* cp)
 {
-	return cp->xor_a_n(cp->reg.c);
+	return cp->xor_a_val(cp->reg.c);
 }
 
 bool OPC::exe_xor_a_d(CPU* cp)
 {
-	return cp->xor_a_n(cp->reg.d);
+	return cp->xor_a_val(cp->reg.d);
 }
 
 bool OPC::exe_xor_a_e(CPU* cp)
 {
-	return cp->xor_a_n(cp->reg.e);
+	return cp->xor_a_val(cp->reg.e);
 }
 
 bool OPC::exe_xor_a_h(CPU* cp)
 {
-	return cp->xor_a_n(cp->reg.h);
+	return cp->xor_a_val(cp->reg.h);
 }
 
 bool OPC::exe_xor_a_l(CPU* cp)
 {
-	return cp->xor_a_n(cp->reg.l);
+	return cp->xor_a_val(cp->reg.l);
 }
 
 bool OPC::exe_xor_a_addr_hl(CPU* cp)
 {
 	return cp->xor_a_addr(cp->reg.hl);
+}
+
+// or
+bool OPC::exe_or_a_a(CPU* cp)
+{
+	return cp->or_a_val(cp->reg.a);
+}
+
+bool OPC::exe_or_a_b(CPU* cp)
+{
+	return cp->or_a_val(cp->reg.b);
+}
+
+bool OPC::exe_or_a_c(CPU* cp)
+{
+	return cp->or_a_val(cp->reg.c);
+}
+
+bool OPC::exe_or_a_d(CPU* cp)
+{
+	return cp->or_a_val(cp->reg.d);
+}
+
+bool OPC::exe_or_a_e(CPU* cp)
+{
+	return cp->or_a_val(cp->reg.e);
+}
+
+bool OPC::exe_or_a_h(CPU* cp)
+{
+	return cp->or_a_val(cp->reg.h);
+}
+
+bool OPC::exe_or_a_l(CPU* cp)
+{
+	return cp->or_a_val(cp->reg.l);
+}
+
+bool OPC::exe_or_a_addr_hl(CPU* cp)
+{
+	return cp->or_a_addr(cp->reg.hl);
+}
+
+// and
+bool OPC::exe_and_a_a(CPU* cp)
+{
+	return cp->and_a_val(cp->reg.a);
+}
+
+bool OPC::exe_and_a_b(CPU* cp)
+{
+	return cp->and_a_val(cp->reg.b);
+}
+
+bool OPC::exe_and_a_c(CPU* cp)
+{
+	return cp->and_a_val(cp->reg.c);
+}
+
+bool OPC::exe_and_a_d(CPU* cp)
+{
+	return cp->and_a_val(cp->reg.d);
+}
+
+bool OPC::exe_and_a_e(CPU* cp)
+{
+	return cp->and_a_val(cp->reg.e);
+}
+
+bool OPC::exe_and_a_h(CPU* cp)
+{
+	return cp->and_a_val(cp->reg.h);
+}
+
+bool OPC::exe_and_a_l(CPU* cp)
+{
+	return cp->and_a_val(cp->reg.l);
+}
+
+bool OPC::exe_and_a_addr_hl(CPU* cp)
+{
+	return cp->and_a_addr(cp->reg.hl);
 }
 
 // INC
@@ -786,14 +868,14 @@ struct OPC::opcode OPC::opcodes[256] = {
 			{ 0x9D, "SBC A,L"	, 1, 1, 1, "Z1HC"},
 			{ 0x9E, "SBC A,(HL)", 1, 2, 2, "Z1HC"},
 			{ 0x9F, "SBC A,A"	, 1, 1, 1, "Z1HC"},
-			{ 0xA0, "AND A,B"	, 1, 1, 1, "Z010"},
-			{ 0xA1, "AND A,C"	, 1, 1, 1, "Z010"},
-			{ 0xA2, "AND A,D"	, 1, 1, 1, "Z010"},
-			{ 0xA3, "AND A,E"	, 1, 1, 1, "Z010"},
-			{ 0xA4, "AND A,H"	, 1, 1, 1, "Z010"},
-			{ 0xA5, "AND A,L"	, 1, 1, 1, "Z010"},
-			{ 0xA6, "AND A,(HL)", 1, 2, 2, "Z010"},
-			{ 0xA7, "AND A,A"	, 1, 1, 1, "Z010"},
+			{ 0xA0, "AND A,B"	, 1, 1, 1, "Z010", exe_and_a_b },
+			{ 0xA1, "AND A,C"	, 1, 1, 1, "Z010", exe_and_a_c },
+			{ 0xA2, "AND A,D"	, 1, 1, 1, "Z010", exe_and_a_d },
+			{ 0xA3, "AND A,E"	, 1, 1, 1, "Z010", exe_and_a_e },
+			{ 0xA4, "AND A,H"	, 1, 1, 1, "Z010", exe_and_a_h },
+			{ 0xA5, "AND A,L"	, 1, 1, 1, "Z010", exe_and_a_l },
+			{ 0xA6, "AND A,(HL)", 1, 2, 2, "Z010", exe_and_a_addr_hl },
+			{ 0xA7, "AND A,A"	, 1, 1, 1, "Z010", exe_and_a_a },
 			{ 0xA8, "XOR A,B"	, 1, 1, 1, "Z000", exe_xor_a_b },
 			{ 0xA9, "XOR A,C"	, 1, 1, 1, "Z000", exe_xor_a_c },
 			{ 0xAA, "XOR A,D"	, 1, 1, 1, "Z000", exe_xor_a_d },
@@ -802,14 +884,14 @@ struct OPC::opcode OPC::opcodes[256] = {
 			{ 0xAD, "XOR A,L"	, 1, 1, 1, "Z000", exe_xor_a_l },
 			{ 0xAE, "XOR A,(HL)", 1, 2, 2, "Z000", exe_xor_a_addr_hl },
 			{ 0xAF, "XOR A,A"	, 1, 1, 1, "Z000", exe_xor_a_a },
-			{ 0xB0, "OR A,B"	, 1, 1, 1, "Z000"},
-			{ 0xB1, "OR A,C"	, 1, 1, 1, "Z000"},
-			{ 0xB2, "OR A,D"	, 1, 1, 1, "Z000"},
-			{ 0xB3, "OR A,E"	, 1, 1, 1, "Z000"},
-			{ 0xB4, "OR A,H"	, 1, 1, 1, "Z000"},
-			{ 0xB5, "OR A,L"	, 1, 1, 1, "Z000"},
-			{ 0xB6, "OR A,(HL)"	, 1, 2, 2, "Z000"},
-			{ 0xB7, "OR A,A"	, 1, 1, 1, "Z000"},
+			{ 0xB0, "OR A,B"	, 1, 1, 1, "Z000", exe_or_a_b},
+			{ 0xB1, "OR A,C"	, 1, 1, 1, "Z000", exe_or_a_c },
+			{ 0xB2, "OR A,D"	, 1, 1, 1, "Z000", exe_or_a_d },
+			{ 0xB3, "OR A,E"	, 1, 1, 1, "Z000", exe_or_a_e },
+			{ 0xB4, "OR A,H"	, 1, 1, 1, "Z000", exe_or_a_h },
+			{ 0xB5, "OR A,L"	, 1, 1, 1, "Z000", exe_or_a_l },
+			{ 0xB6, "OR A,(HL)"	, 1, 2, 2, "Z000", exe_or_a_addr_hl },
+			{ 0xB7, "OR A,A"	, 1, 1, 1, "Z000", exe_or_a_a },
 			{ 0xB8, "CP A,B"	, 1, 1, 1, "Z1HC"},
 			{ 0xB9, "CP A,C"	, 1, 1, 1, "Z1HC"},
 			{ 0xBA, "CP A,D"	, 1, 1, 1, "Z1HC"},

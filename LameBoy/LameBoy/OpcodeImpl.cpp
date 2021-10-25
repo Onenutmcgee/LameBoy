@@ -44,7 +44,7 @@ bool CPU::jr_flag_i8(BYTE flag, bool invert)
 	}
 }
 
-bool CPU::xor_a_n(BYTE comp)
+bool CPU::xor_a_val(BYTE comp)
 {
 	reg.a ^= comp;
 
@@ -58,7 +58,41 @@ bool CPU::xor_a_n(BYTE comp)
 bool CPU::xor_a_addr(WORD address)
 {
 	BYTE val = _mem->ReadByte(address);
-	return xor_a_n(val);
+	return xor_a_val(val);
+}
+
+bool CPU::or_a_val(BYTE val)
+{
+	reg.a |= val;
+
+	reg.f = 0;
+	if (reg.a == 0)
+		SetFlag(FLAG_Z);
+
+	return false;
+}
+
+bool CPU::or_a_addr(WORD address)
+{
+	BYTE val = _mem->ReadByte(address);
+	return or_a_val(val);
+}
+
+bool CPU::and_a_val(BYTE val)
+{
+	reg.a &= val;
+
+	reg.f = 0x20;
+	if (reg.a == 0)
+		SetFlag(FLAG_Z);
+
+	return false;
+}
+
+bool CPU::and_a_addr(WORD address)
+{
+	BYTE val = _mem->ReadByte(address);
+	return and_a_val(val);
 }
 
 bool CPU::ld_immediate_u16_dest(WORD* dest)
