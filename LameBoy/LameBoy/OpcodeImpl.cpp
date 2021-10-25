@@ -90,6 +90,18 @@ bool CPU::ld_a_addr(WORD address)
 	return ld_a_val(val);
 }
 
+bool CPU::ld_a_addr_immediate_u16()
+{
+	WORD address = FetchNextImmediateWord();
+	return ld_a_addr(address);
+}
+
+bool CPU::ld_a_addr_offset_u8(WORD offset)
+{
+	BYTE val = FetchNextImmediateByte();
+	return ld_a_addr(offset + val);
+}
+
 bool CPU::ld_b_val(BYTE val)
 {
 	reg.b = val;
@@ -193,6 +205,12 @@ bool CPU::ld_immediate_u16_addr_val(BYTE val)
 {
 	WORD address = FetchNextImmediateWord();
 	return ld_addr_val(address, val);
+}
+
+bool CPU::ld_offset_u8_val(WORD offset, BYTE val)
+{
+	BYTE addOffset = FetchNextImmediateByte();
+	return ld_addr_val(offset + addOffset, val);
 }
 
 bool CPU::dec_reg(BYTE* regAddr)

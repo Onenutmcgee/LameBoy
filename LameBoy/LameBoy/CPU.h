@@ -53,6 +53,8 @@ public:
 	*/
 	bool ld_a_val(BYTE);
 	bool ld_a_addr(WORD);
+	bool ld_a_addr_immediate_u16();
+	bool ld_a_addr_offset_u8(WORD offset);
 	bool ld_b_val(BYTE);
 	bool ld_b_addr(WORD);
 	bool ld_c_val(BYTE);
@@ -72,6 +74,7 @@ public:
 	bool ld_addr_val(WORD address, BYTE val);
 	bool ld_addr_immediate_u8(WORD address);
 	bool ld_immediate_u16_addr_val(BYTE val);
+	bool ld_offset_u8_val(WORD offset, BYTE val);
 
 private:
 	void SetFlag(BYTE);

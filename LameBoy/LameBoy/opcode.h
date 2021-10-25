@@ -34,6 +34,13 @@ namespace OPC
 	bool exe_ld_a_h(CPU* cp);
 	bool exe_ld_a_l(CPU* cp);
 	bool exe_ld_a_addr_hl(CPU* cp);
+	bool exe_ld_a_addr_hl_inc(CPU* cp);
+	bool exe_ld_a_addr_hl_dec(CPU* cp);
+	bool exe_ld_a_addr_bc(CPU* cp);
+	bool exe_ld_a_addr_de(CPU* cp);
+	bool exe_ld_a_addr_ff00_u8(CPU* cp);
+	bool exe_ld_a_addr_ff00_c(CPU* cp);
+	bool exe_ld_a_addr_u16(CPU* cp);
 
 	bool exe_ld_b_a(CPU* cp);
 	bool exe_ld_b_c(CPU* cp);
@@ -99,8 +106,10 @@ namespace OPC
 	bool exe_ld_bc_a(CPU* cp);
 	bool exe_ld_de_a(CPU* cp);
 
-
 	bool exe_ld_addr_hl_u8(CPU* cp);
+	bool exe_ld_ff00_immediate_u8_a(CPU* cp);
+	bool exe_ld_ff00_c_a(CPU* cp);
+
 	
 
 	// 16-bit loads
