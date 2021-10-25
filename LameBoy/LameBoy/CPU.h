@@ -33,18 +33,24 @@ public:
 	// byte ALU
 	bool xor_a_val(BYTE val);
 	bool xor_a_addr(WORD);
+	bool xor_a_immediate_u8();
 	bool or_a_val(BYTE val);
 	bool or_a_addr(WORD address);
+	bool or_a_immediate_u8();
 	bool and_a_val(BYTE val);
 	bool and_a_addr(WORD address);
+	bool and_a_immediate_u8();
 	bool dec_reg(BYTE*);
 	bool inc_reg(BYTE*);
 	bool sub_a_val(BYTE val);
 	bool sub_a_addr(WORD address);
+	bool sub_a_immediate_u8();
 	bool sub_carry_a_val(BYTE val);
 	bool sub_carry_a_addr(WORD val);
+	bool sub_carry_a_immediate_u8();
 	bool cp_a_val(BYTE val);
 	bool cp_a_addr(WORD address);
+	bool cp_a_immediate_u8();
 
 	// word ALU
 	bool dec_reg(WORD*);

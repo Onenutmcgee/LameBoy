@@ -130,6 +130,7 @@ namespace OPC
 	bool exe_sub_a_h(CPU* cp);
 	bool exe_sub_a_l(CPU* cp);
 	bool exe_sub_a_addr_hl(CPU* cp);
+	bool exe_sub_a_u8(CPU* cp);
 
 	// SBC
 	bool exe_sbc_a_a(CPU* cp);
@@ -140,6 +141,7 @@ namespace OPC
 	bool exe_sbc_a_h(CPU* cp);
 	bool exe_sbc_a_l(CPU* cp);
 	bool exe_sbc_a_addr_hl(CPU* cp);
+	bool exe_sbc_a_u8(CPU* cp);
 
 	// XOR
 	bool exe_xor_a_a(CPU* cp);
@@ -150,6 +152,7 @@ namespace OPC
 	bool exe_xor_a_h(CPU* cp);
 	bool exe_xor_a_l(CPU* cp);
 	bool exe_xor_a_addr_hl(CPU* cp);
+	bool exe_xor_a_u8(CPU* cp);
 
 	// AND
 	bool exe_and_a_a(CPU* cp);
@@ -160,6 +163,7 @@ namespace OPC
 	bool exe_and_a_h(CPU* cp);
 	bool exe_and_a_l(CPU* cp);
 	bool exe_and_a_addr_hl(CPU* cp);
+	bool exe_and_a_u8(CPU* cp);
 
 	// or
 	bool exe_or_a_a(CPU* cp);
@@ -170,6 +174,7 @@ namespace OPC
 	bool exe_or_a_h(CPU* cp);
 	bool exe_or_a_l(CPU* cp);
 	bool exe_or_a_addr_hl(CPU* cp);
+	bool exe_or_a_u8(CPU* cp);
 
 	// CP
 	bool exe_cp_a_a(CPU* cp);
@@ -180,6 +185,7 @@ namespace OPC
 	bool exe_cp_a_h(CPU* cp);
 	bool exe_cp_a_l(CPU* cp);
 	bool exe_cp_a_addr_hl(CPU* cp);
+	bool exe_cp_a_u8(CPU* cp);
 
 	// INC
 	bool exe_inc_a(CPU* cp);

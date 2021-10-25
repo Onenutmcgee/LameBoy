@@ -61,6 +61,12 @@ bool CPU::xor_a_addr(WORD address)
 	return xor_a_val(val);
 }
 
+bool CPU::xor_a_immediate_u8()
+{
+	BYTE val = FetchNextImmediateByte();
+	return xor_a_val(val);
+}
+
 bool CPU::or_a_val(BYTE val)
 {
 	reg.a |= val;
@@ -78,6 +84,12 @@ bool CPU::or_a_addr(WORD address)
 	return or_a_val(val);
 }
 
+bool CPU::or_a_immediate_u8()
+{
+	BYTE val = FetchNextImmediateByte();
+	return or_a_val(val);
+}
+
 bool CPU::and_a_val(BYTE val)
 {
 	reg.a &= val;
@@ -92,6 +104,12 @@ bool CPU::and_a_val(BYTE val)
 bool CPU::and_a_addr(WORD address)
 {
 	BYTE val = _mem->ReadByte(address);
+	return and_a_val(val);
+}
+
+bool CPU::and_a_immediate_u8()
+{
+	BYTE val = FetchNextImmediateByte();
 	return and_a_val(val);
 }
 
@@ -113,6 +131,12 @@ bool CPU::sub_a_val(BYTE val)
 bool CPU::sub_a_addr(WORD address)
 {
 	BYTE val = _mem->ReadByte(address);
+	return sub_a_val(val);
+}
+
+bool CPU::sub_a_immediate_u8()
+{
+	BYTE val = FetchNextImmediateByte();
 	return sub_a_val(val);
 }
 
@@ -140,6 +164,12 @@ bool CPU::sub_carry_a_addr(WORD address)
 	return sub_carry_a_val(val);
 }
 
+bool CPU::sub_carry_a_immediate_u8()
+{
+	BYTE val = FetchNextImmediateByte();
+	return sub_carry_a_val(val);
+}
+
 bool CPU::cp_a_val(BYTE val)
 {
 	reg.f = 0x40;
@@ -155,6 +185,12 @@ bool CPU::cp_a_val(BYTE val)
 bool CPU::cp_a_addr(WORD address)
 {
 	BYTE val = _mem->ReadByte(address);
+	return cp_a_val(val);
+}
+
+bool CPU::cp_a_immediate_u8()
+{
+	BYTE val = FetchNextImmediateByte();
 	return cp_a_val(val);
 }
 
