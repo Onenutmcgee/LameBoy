@@ -95,6 +95,69 @@ bool CPU::and_a_addr(WORD address)
 	return and_a_val(val);
 }
 
+bool CPU::sub_a_val(BYTE val)
+{
+	BYTE oldA = reg.a;
+	reg.a -= val;
+
+	reg.f = 0x40;
+	if (reg.a == 0)
+		SetFlag(FLAG_Z);
+	if ((oldA & 0xf) < (val & 0xf))
+		SetFlag(FLAG_H);
+	if (oldA < val)
+		SetFlag(FLAG_C);
+	return false;
+}
+
+bool CPU::sub_a_addr(WORD address)
+{
+	BYTE val = _mem->ReadByte(address);
+	return sub_a_val(val);
+}
+
+bool CPU::sub_carry_a_val(BYTE val)
+{
+	BYTE oldA = reg.a;
+	BYTE carry = TestFlag(FLAG_C) ? 1 : 0;
+
+	int full_result = reg.a - val - carry;
+	reg.a = static_cast<BYTE>(full_result);
+
+	reg.f = 0x40;
+	if (reg.a == 0)
+		SetFlag(FLAG_Z);
+	if (((oldA & 0xf) < (val & 0xf) + carry))
+		SetFlag(FLAG_H);
+	if (full_result < 0)
+		SetFlag(FLAG_C);
+	return false;
+}
+
+bool CPU::sub_carry_a_addr(WORD address)
+{
+	BYTE val = _mem->ReadByte(address);
+	return sub_carry_a_val(val);
+}
+
+bool CPU::cp_a_val(BYTE val)
+{
+	reg.f = 0x40;
+	if (reg.a == val)
+		SetFlag(FLAG_Z);
+	if ((reg.a & 0xf) < (val & 0xf))
+		SetFlag(FLAG_H);
+	if (reg.a < val)
+		SetFlag(FLAG_C);
+	return false;
+}
+
+bool CPU::cp_a_addr(WORD address)
+{
+	BYTE val = _mem->ReadByte(address);
+	return cp_a_val(val);
+}
+
 bool CPU::ld_immediate_u16_dest(WORD* dest)
 {
 	WORD val = FetchNextImmediateWord();

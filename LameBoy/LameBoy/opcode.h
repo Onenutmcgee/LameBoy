@@ -117,6 +117,30 @@ namespace OPC
 	bool exe_ld_sp_u16(CPU* cp);
 
 	// ALU
+	// ADD
+
+	// ADC
+
+	// SUB
+	bool exe_sub_a_a(CPU* cp);
+	bool exe_sub_a_b(CPU* cp);
+	bool exe_sub_a_c(CPU* cp);
+	bool exe_sub_a_d(CPU* cp);
+	bool exe_sub_a_e(CPU* cp);
+	bool exe_sub_a_h(CPU* cp);
+	bool exe_sub_a_l(CPU* cp);
+	bool exe_sub_a_addr_hl(CPU* cp);
+
+	// SBC
+	bool exe_sbc_a_a(CPU* cp);
+	bool exe_sbc_a_b(CPU* cp);
+	bool exe_sbc_a_c(CPU* cp);
+	bool exe_sbc_a_d(CPU* cp);
+	bool exe_sbc_a_e(CPU* cp);
+	bool exe_sbc_a_h(CPU* cp);
+	bool exe_sbc_a_l(CPU* cp);
+	bool exe_sbc_a_addr_hl(CPU* cp);
+
 	// XOR
 	bool exe_xor_a_a(CPU* cp);
 	bool exe_xor_a_b(CPU* cp);
@@ -146,6 +170,16 @@ namespace OPC
 	bool exe_or_a_h(CPU* cp);
 	bool exe_or_a_l(CPU* cp);
 	bool exe_or_a_addr_hl(CPU* cp);
+
+	// CP
+	bool exe_cp_a_a(CPU* cp);
+	bool exe_cp_a_b(CPU* cp);
+	bool exe_cp_a_c(CPU* cp);
+	bool exe_cp_a_d(CPU* cp);
+	bool exe_cp_a_e(CPU* cp);
+	bool exe_cp_a_h(CPU* cp);
+	bool exe_cp_a_l(CPU* cp);
+	bool exe_cp_a_addr_hl(CPU* cp);
 
 	// INC
 	bool exe_inc_a(CPU* cp);
