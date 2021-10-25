@@ -20,6 +20,8 @@ public:
 
 	BYTE ReadByte(WORD address);
 	void WriteByte(WORD address, BYTE value);
+	
+	void SetLoRomBank(BYTE value);
 
 	void DumpToCout();
 	std::string Title();
@@ -34,6 +36,7 @@ private:
 	const WORD RAM_BANK_OFFSET = 0xA000;
 
 	BYTE* _cartMemArray;
-	WORD _currentRomBank = 1;
+	BYTE _currentRomBank = 1;
+	BYTE _currentRamBank = 0;
 };
 

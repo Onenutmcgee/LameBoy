@@ -94,11 +94,9 @@ SIGNED_WORD MemoryManager::ReadSignedWord(WORD address)
 
 void MemoryManager::WriteByte(WORD address, BYTE value)
 {
-	// There is some switching that needs to be done here depending on the address
-	// TODO: Handle special ROM writes and RAM protection
 	if (address < VRAM_OFFSET)
 	{
-		throw this;
+		HandleBanking(address, value);
 	}
 	else if (address < CART_RAM_OFFSET) // this is a write to VRAM
 	{
@@ -123,5 +121,26 @@ void MemoryManager::WriteByte(WORD address, BYTE value)
 			return;
 
 		_upperMemory[address - UPPER_MEM_OFFSET] = value;
+	}
+}
+
+void MemoryManager::HandleBanking(WORD address, BYTE value)
+{
+	if (address < BANK_RAM_ENABLE_CUTTOFF)
+	{
+		// not yet implemented.  ROM only doesn't use
+	}
+	else if (address < BANK_ROM_CHANGE_LO_CUTTOFF)
+	{ // handles setting the lower 5 bits of the rom bank selector
+		_cart->SetLoRomBank(value);
+	}
+	else if (address < BANK_ROM_CHANGE_HI_CUTTOFF)
+	{ // handles writting to bit 5-6 of rom bank selector
+		
+	  // not implemented here yet.  ROM only doesn't use 
+	}
+	else
+	{
+		// changes ram/rom mode for MBC1.  ROM only doesn't use
 	}
 }
