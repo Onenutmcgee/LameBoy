@@ -5,6 +5,33 @@ bool CPU::nop()
 	return false;
 }
 
+bool CPU::push_reg(WORD val)
+{
+	BYTE upper = (BYTE)((val & 0xFF00) >> 8);
+	BYTE lower = (BYTE)(val & 0x00FF);
+	_mem->WriteByte(reg.sp, lower);
+	reg.sp--;
+	_mem->WriteByte(reg.sp, upper);
+	reg.sp--;
+	return false;
+}
+
+bool CPU::pop_reg(WORD* reg_addr)
+{
+	reg.sp++;
+	BYTE upper = _mem->ReadByte(reg.sp);
+	reg.sp++;
+	BYTE lower = _mem->ReadByte(reg.sp);
+	
+	WORD val = upper;
+	val = val << 8;
+	val |= lower;
+
+	*reg_addr = val;
+
+	return false;
+}
+
 bool CPU::jp_addr(WORD address)
 {
 	WORD val = _mem->ReadWord(address);
@@ -36,6 +63,59 @@ bool CPU::jr_flag_i8(BYTE flag, bool invert)
 	if (check)
 	{
 		reg.pc += val;
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+bool CPU::call_u16()
+{
+	WORD addr = FetchNextImmediateWord();
+	push_reg(reg.pc);
+	reg.pc = addr;
+	return true;
+}
+
+bool CPU::call_flag_u16(BYTE flag, bool invert)
+{
+	WORD addr = FetchNextImmediateWord();
+
+	bool check = TestFlag(flag);
+
+	if (invert)
+		check = !check;
+
+	if (check)
+	{
+		push_reg(reg.pc);
+		reg.pc = addr;
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+bool CPU::ret()
+{
+	pop_reg(&reg.pc);
+	return true;
+}
+
+bool CPU::ret_flag(BYTE flag, bool invert)
+{
+	bool check = TestFlag(flag);
+
+	if (invert)
+		check = !check;
+
+	if (check)
+	{
+		pop_reg(&reg.pc);
 		return true;
 	}
 	else

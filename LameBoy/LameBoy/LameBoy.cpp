@@ -22,7 +22,8 @@ int main()
     BYTE cycles;
 
     bool skip = true;
-    WORD stopskip = 0x2a0;
+    WORD stopskip = 0x2a4;
+    WORD MainLoop = 0x02c4;
     
     if (dohax)
     {
@@ -40,14 +41,14 @@ int main()
 
         while (1 == 1)
         {
-            if (skip && cp->reg.pc >= stopskip)
+            OPC::opcode op = cp->PeekNextOpcode();
+            if (skip && (cp->reg.pc == stopskip || op.code == 0xc9))
             {
                 skip = false;
             }
 
             if (!skip)
             {
-                OPC::opcode op = cp->PeekNextOpcode();
                 std::cout << "PC: 0x" << std::setw(4) << std::setfill('0') << std::hex << +(cp->reg.pc) << "   0x" << std::setw(2) << std::setfill('0') << std::hex << +(op.code) << " " << op.disassembly << '\n';
             }
 

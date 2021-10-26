@@ -24,11 +24,17 @@ public:
 	
 	bool nop();
 	bool set_interrupts_enabled(bool);
+	bool push_reg(WORD reg);
+	bool pop_reg(WORD* reg);
 
 	// jumps
 	bool jp_addr(WORD);
 	bool jr_i8();
 	bool jr_flag_i8(BYTE flag, bool invert);
+	bool call_u16();
+	bool call_flag_u16(BYTE flag, bool invert);
+	bool ret();
+	bool ret_flag(BYTE flag, bool invert);
 
 	// byte ALU
 	bool xor_a_val(BYTE val);

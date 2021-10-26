@@ -9,6 +9,15 @@ namespace OPC
 	bool exe_di(CPU* cp);
 	bool exe_ei(CPU* cp);
 
+	bool exe_push_bc(CPU* cp);
+	bool exe_pop_bc(CPU* cp);
+	bool exe_push_de(CPU* cp);
+	bool exe_pop_de(CPU* cp);
+	bool exe_push_hl(CPU* cp);
+	bool exe_pop_hl(CPU* cp);
+	bool exe_push_af(CPU* cp);
+	bool exe_pop_af(CPU* cp);
+
 	// jumps
 	bool exe_jp_addr_pc(CPU* cp);
 
@@ -17,6 +26,19 @@ namespace OPC
 	bool exe_jr_z_i8(CPU* cp);
 	bool exe_jr_nc_i8(CPU* cp);
 	bool exe_jr_c_i8(CPU* cp);
+
+	bool exe_call_u16(CPU*);
+	bool exe_call_nz_u16(CPU*);
+	bool exe_call_z_u16(CPU*);
+	bool exe_call_nc_u16(CPU*);
+	bool exe_call_c_u16(CPU*);
+
+	bool exe_ret(CPU*);
+	bool exe_reti(CPU*);
+	bool exe_ret_nz(CPU*);
+	bool exe_ret_z(CPU*);
+	bool exe_ret_nc(CPU*);
+	bool exe_ret_c(CPU*);
 
 	// 8-bit loads
 	bool exe_ld_a_u8(CPU* cp);
