@@ -9,20 +9,21 @@ bool CPU::push_reg(WORD val)
 {
 	BYTE upper = (BYTE)((val & 0xFF00) >> 8);
 	BYTE lower = (BYTE)(val & 0x00FF);
-	_mem->WriteByte(reg.sp, lower);
 	reg.sp--;
 	_mem->WriteByte(reg.sp, upper);
 	reg.sp--;
+	_mem->WriteByte(reg.sp, lower);
+	
 	return false;
 }
 
 bool CPU::pop_reg(WORD* reg_addr)
 {
+	BYTE lower = _mem->ReadByte(reg.sp);
 	reg.sp++;
 	BYTE upper = _mem->ReadByte(reg.sp);
 	reg.sp++;
-	BYTE lower = _mem->ReadByte(reg.sp);
-	
+
 	WORD val = upper;
 	val = val << 8;
 	val |= lower;
