@@ -139,6 +139,8 @@ namespace OPC
 	bool exe_ld_sp_u16(CPU* cp);
 
 	// ALU
+	bool exe_cpl_a(CPU* cp);
+	 
 	// ADD
 
 	// ADC
@@ -235,6 +237,8 @@ namespace OPC
 	bool exe_dec_hl(CPU* cp);
 	bool exe_dec_sp(CPU* cp);
 
+	// EXTENDED OPCODES
+
 	struct opcode {
 
 		WORD code;
@@ -247,6 +251,5 @@ namespace OPC
 	};
 
 	extern struct opcode opcodes[];
-
-	
+	extern struct opcode ext_opcodes[];
 }

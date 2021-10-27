@@ -568,6 +568,11 @@ bool OPC::exe_ld_sp_u16(CPU* cp)
 }
 
 // ALU
+bool OPC::exe_cpl_a(CPU* cp)
+{
+	return cp->cpl_a();
+}
+ 
 // sub
 bool OPC::exe_sub_a_a(CPU* cp)
 {
@@ -1004,7 +1009,7 @@ struct OPC::opcode OPC::opcodes[256] = {
 			{ 0x2C, "INC L"		, 1, 1, 1, "Z0H-", exe_inc_l},
 			{ 0x2D, "DEC L"		, 1, 1, 1, "Z1H-", exe_dec_l},
 			{ 0x2E, "LD L,u8"	, 2, 2, 2, "----", exe_ld_l_u8},
-			{ 0x2F, "CPL"		, 1, 1, 1, "-11-"},
+			{ 0x2F, "CPL"		, 1, 1, 1, "-11-", exe_cpl_a },
 			{ 0x30, "JR NC,i8"	, 2, 2, 3, "----", exe_jr_nc_i8},
 			{ 0x31, "LD SP,u16"	, 3, 3, 3, "----", exe_ld_sp_u16},
 			{ 0x32, "LD (HL-),A", 1, 2, 2, "----", exe_ldd_hl_a},

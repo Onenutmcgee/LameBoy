@@ -125,6 +125,13 @@ bool CPU::ret_flag(BYTE flag, bool invert)
 	}
 }
 
+bool CPU::cpl_a()
+{
+	reg.a = ~reg.a;
+	reg.f = 0x60;
+	return false;
+}
+
 bool CPU::xor_a_val(BYTE comp)
 {
 	reg.a ^= comp;
@@ -273,6 +280,32 @@ bool CPU::cp_a_immediate_u8()
 {
 	BYTE val = FetchNextImmediateByte();
 	return cp_a_val(val);
+}
+
+BYTE CPU::swap(BYTE reg_val)
+{
+	return (reg_val << 4) | (reg_val >> 4);
+}
+
+bool CPU::swap(BYTE* reg_addr)
+{
+	BYTE val = swap(*reg_addr);
+	*reg_addr = val;
+	reg.f ^= reg.f;
+	if (val == 0)
+		SetFlag(FLAG_Z);
+	return false;
+}
+
+bool CPU::swap_addr(WORD address)
+{
+	BYTE val = swap(_mem->ReadByte(address));
+	_mem->WriteByte(address, val);
+	reg.f ^= reg.f;
+	if (val == 0)
+		SetFlag(FLAG_Z);
+
+	return false;
 }
 
 bool CPU::ld_immediate_u16_dest(WORD* dest)

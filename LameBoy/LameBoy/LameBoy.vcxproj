@@ -140,11 +140,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CPU.cpp" />
+    <ClCompile Include="ext_opcode.cpp" />
     <ClCompile Include="GamePak.cpp" />
     <ClCompile Include="LameBoy.cpp" />
     <ClCompile Include="MemoryManager.cpp" />
     <ClCompile Include="opcode.cpp" />
-    <ClCompile Include="OpcodeImpl.cpp" />
+    <ClCompile Include="CPU_OpcodeImpl.cpp" />
     <ClCompile Include="Registers.cpp" />
   </ItemGroup>
   <ItemGroup>

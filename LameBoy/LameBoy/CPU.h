@@ -37,6 +37,7 @@ public:
 	bool ret_flag(BYTE flag, bool invert);
 
 	// byte ALU
+	bool cpl_a();
 	bool xor_a_val(BYTE val);
 	bool xor_a_addr(WORD);
 	bool xor_a_immediate_u8();
@@ -57,6 +58,8 @@ public:
 	bool cp_a_val(BYTE val);
 	bool cp_a_addr(WORD address);
 	bool cp_a_immediate_u8();
+	bool swap(BYTE* reg_addr);
+	bool swap_addr(WORD address);
 
 	// word ALU
 	bool dec_reg(WORD*);
@@ -102,6 +105,7 @@ private:
 	void SetFlag(BYTE);
 	void ClearFlag(BYTE);
 	bool TestFlag(BYTE);
+	BYTE swap(BYTE);
 
 	BYTE FetchNextImmediateByte();
 	WORD FetchNextImmediateWord();

@@ -36,6 +36,13 @@ OPC::opcode CPU::ExecuteNextOpcode(BYTE* cycles)
 	reg.pc++;
 
 	OPC::opcode code = OPC::opcodes[op];
+
+	if (code.code == 0xCB)
+	{
+		op = _mem->ReadByte(reg.pc);
+		reg.pc++;
+		code = OPC::ext_opcodes[op];
+	}
 	
 	// TODO: Remove this NULL check
 	if (code.execute)
@@ -74,8 +81,15 @@ WORD CPU::FetchNextImmediateWord()
 OPC::opcode CPU::PeekNextOpcode()
 {
 	BYTE op = _mem->ReadByte(reg.pc);
+
+	if (op == 0xCB)
+	{
+		op = _mem->ReadByte(reg.pc + 1);
+		return OPC::ext_opcodes[op];
+	}
 	return OPC::opcodes[op];
 }
+
 
 void CPU::SetFlag(BYTE flag)
 {

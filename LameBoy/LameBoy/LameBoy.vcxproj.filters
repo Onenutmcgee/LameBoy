@@ -45,10 +45,13 @@
     <ClCompile Include="GamePak.cpp">
       <Filter>Source Files\Emulator</Filter>
     </ClCompile>
-    <ClCompile Include="OpcodeImpl.cpp">
+    <ClCompile Include="CPU_OpcodeImpl.cpp">
       <Filter>Source Files\Emulator</Filter>
     </ClCompile>
     <ClCompile Include="opcode.cpp">
+      <Filter>Source Files\Emulator</Filter>
+    </ClCompile>
+    <ClCompile Include="ext_opcode.cpp">
       <Filter>Source Files\Emulator</Filter>
     </ClCompile>
   </ItemGroup>
