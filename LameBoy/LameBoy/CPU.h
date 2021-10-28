@@ -101,6 +101,30 @@ public:
 	bool ld_immediate_u16_addr_val(BYTE val);
 	bool ld_offset_u8_val(WORD offset, BYTE val);
 
+	// bit set, res, and test
+	bool bit_set(BYTE bit, BYTE* reg_addr);
+	bool bit_set(BYTE bit, WORD addr);
+	bool bit_res(BYTE bit, BYTE* reg_addr);
+	bool bit_res(BYTE bit, WORD addr);
+	bool bit_test(BYTE bit, BYTE val);
+	bool bit_test(BYTE bit, WORD addr);
+
+	// bit rotates
+	bool rlc_reg(BYTE* reg_addr);
+	bool rlc_addr(WORD addr);
+	bool rrc_reg(BYTE* reg_addr);
+	bool rrc_addr(WORD addr);
+	bool rl_reg(BYTE* reg_addr);
+	bool rl_addr(WORD addr);
+	bool rr_reg(BYTE* reg_addr);
+	bool rr_addr(WORD addr);
+	bool sla_reg(BYTE* reg_addr);
+	bool sla_addr(WORD addr);
+	bool sra_reg(BYTE* reg_addr);
+	bool sra_addr(WORD addr);
+	bool srl_reg(BYTE* reg_addr);
+	bool srl_addr(WORD addr);
+
 private:
 	void SetFlag(BYTE);
 	void ClearFlag(BYTE);

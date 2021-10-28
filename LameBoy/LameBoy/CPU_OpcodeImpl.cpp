@@ -509,3 +509,228 @@ bool CPU::inc_reg(WORD* regAddr)
 	(*regAddr)++;
 	return false;
 }
+
+// bit ops
+bool CPU::bit_set(BYTE bit, BYTE* reg_addr)
+{
+	*reg_addr = (*reg_addr) | (1 << bit);
+	return false;
+}
+
+bool CPU::bit_set(BYTE bit, WORD addr)
+{
+	BYTE val = _mem->ReadByte(addr);
+	val |= (1 << bit);
+	_mem->WriteByte(addr, val);
+	return false;
+}
+
+bool CPU::bit_res(BYTE bit, BYTE* reg_addr)
+{
+	*reg_addr = (*reg_addr) & (~(1 << bit));
+	return false;
+}
+
+bool CPU::bit_res(BYTE bit, WORD addr)
+{
+	BYTE val = _mem->ReadByte(addr);
+	val &= (~(1 << bit));
+	_mem->WriteByte(addr, val);
+	return false;
+}
+
+bool CPU::bit_test(BYTE bit, BYTE val)
+{
+	bool test = ((val & (1 << bit)) == 0);
+
+	ClearFlag(FLAG_N);
+	SetFlag(FLAG_H);
+	if (test)
+		SetFlag(FLAG_Z);
+	else
+		ClearFlag(FLAG_Z);
+
+	return false;
+}
+
+bool CPU::bit_test(BYTE bit, WORD addr)
+{
+	bit_test(bit, _mem->ReadByte(addr));
+	return false;
+}
+
+bool CPU::rlc_reg(BYTE* reg_addr)
+{
+	BYTE val = *reg_addr;
+	bool carry = (val & 0x80) != 0;
+
+	reg.f = 0;
+	*reg_addr = (val << 1) | (carry ? 0x1 : 0x0);
+
+	if (carry)
+		SetFlag(FLAG_C);
+	if (*reg_addr == 0)
+		SetFlag(FLAG_Z);
+
+	return false;
+}
+
+bool CPU::rlc_addr(WORD address)
+{
+	BYTE val = _mem->ReadByte(address);
+	rlc_reg(&val);
+	_mem->WriteByte(address, val);
+
+	return false;
+}
+
+bool CPU::rrc_reg(BYTE* reg_addr)
+{
+	BYTE val = *reg_addr;
+	bool carry = (val & 0x01) != 0;
+
+	reg.f = 0;
+	*reg_addr = (val >> 1) | (carry ? 0x80 : 0x0);
+
+	if (carry)
+		SetFlag(FLAG_C);
+	if (*reg_addr == 0)
+		SetFlag(FLAG_Z);
+
+	return false;
+}
+
+bool CPU::rrc_addr(WORD address)
+{
+	BYTE val = _mem->ReadByte(address);
+	rrc_reg(&val);
+	_mem->WriteByte(address, val);
+
+	return false;
+}
+
+bool CPU::rl_reg(BYTE* reg_addr)
+{
+	BYTE val = *reg_addr;
+	bool bit7 = (val & 0x80);
+
+	*reg_addr = (val << 1) | (TestFlag(FLAG_C) ? 0x1 : 0x0);
+
+	reg.f = 0;
+	if (bit7 > 0)
+		SetFlag(FLAG_C);
+	if (*reg_addr == 0)
+		SetFlag(FLAG_Z);
+
+	return false;
+}
+
+bool CPU::rl_addr(WORD address)
+{
+	BYTE val = _mem->ReadByte(address);
+	rl_reg(&val);
+	_mem->WriteByte(address, val);
+
+	return false;
+}
+
+bool CPU::rr_reg(BYTE* reg_addr)
+{
+	BYTE val = *reg_addr;
+	bool bit0 = (val & 0x01);
+
+	*reg_addr = (val >> 1) | (TestFlag(FLAG_C) ? 0x8 : 0x0);
+
+	reg.f = 0;
+	if (bit0 > 0)
+		SetFlag(FLAG_C);
+	if (*reg_addr == 0)
+		SetFlag(FLAG_Z);
+
+	return false;
+}
+
+bool CPU::rr_addr(WORD address)
+{
+	BYTE val = _mem->ReadByte(address);
+	rr_reg(&val);
+	_mem->WriteByte(address, val);
+
+	return false;
+}
+
+bool CPU::sla_reg(BYTE* reg_addr)
+{
+	BYTE val = *reg_addr;
+	bool bit7 = (val & 0x80);
+
+	*reg_addr = (val << 1) ;
+
+	reg.f = 0;
+	if (bit7 > 0)
+		SetFlag(FLAG_C);
+	if (*reg_addr == 0)
+		SetFlag(FLAG_Z);
+	
+	return false;
+}
+
+bool CPU::sla_addr(WORD address)
+{
+	BYTE val = _mem->ReadByte(address);
+	sla_reg(&val);
+	_mem->WriteByte(address, val);
+
+	return false;
+}
+
+bool CPU::sra_reg(BYTE* reg_addr)
+{
+	BYTE val = *reg_addr;
+	bool bit0 = (val & 0x01);
+	BYTE bit7 = (val & 0x80);
+
+	*reg_addr = ((val >> 1) | bit7);
+
+	reg.f = 0;
+	if (bit0 > 0)
+		SetFlag(FLAG_C);
+	if (*reg_addr == 0)
+		SetFlag(FLAG_Z);
+
+	return false;
+}
+
+bool CPU::sra_addr(WORD address)
+{
+	BYTE val = _mem->ReadByte(address);
+	sra_reg(&val);
+	_mem->WriteByte(address, val);
+
+	return false;
+}
+
+bool CPU::srl_reg(BYTE* reg_addr)
+{
+	BYTE val = *reg_addr;
+	bool bit0 = (val & 0x01);
+
+	*reg_addr = (val >> 1);
+
+	reg.f = 0;
+	if (bit0 > 0)
+		SetFlag(FLAG_C);
+	if (*reg_addr == 0)
+		SetFlag(FLAG_Z);
+
+	return false;
+}
+
+bool CPU::srl_addr(WORD address)
+{
+	BYTE val = _mem->ReadByte(address);
+	srl_reg(&val);
+	_mem->WriteByte(address, val);
+
+	return false;
+}
