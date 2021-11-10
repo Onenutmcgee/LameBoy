@@ -29,10 +29,12 @@ public:
 
 	// jumps
 	bool jp_addr(WORD);
+	bool jp_val(WORD);
 	bool jr_i8();
 	bool jr_flag_i8(BYTE flag, bool invert);
 	bool call_u16();
 	bool call_flag_u16(BYTE flag, bool invert);
+	bool call_addr(WORD addr);
 	bool ret();
 	bool ret_flag(BYTE flag, bool invert);
 
@@ -55,6 +57,14 @@ public:
 	bool sub_carry_a_val(BYTE val);
 	bool sub_carry_a_addr(WORD val);
 	bool sub_carry_a_immediate_u8();
+	
+	bool add_a_val(BYTE val);
+	bool add_a_addr(WORD address);
+	bool add_a_immediate_u8();
+	bool add_carry_a_val(BYTE val);
+	bool add_carry_a_addr(WORD val);
+	bool add_carry_a_immediate_u8();
+	
 	bool cp_a_val(BYTE val);
 	bool cp_a_addr(WORD address);
 	bool cp_a_immediate_u8();
@@ -64,6 +74,7 @@ public:
 	// word ALU
 	bool dec_reg(WORD*);
 	bool inc_reg(WORD*);
+	bool add_hl(WORD val);
 
 	// 16 bit loads
 	bool ld_immediate_u16_dest(WORD*);

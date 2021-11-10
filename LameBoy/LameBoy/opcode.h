@@ -20,6 +20,7 @@ namespace OPC
 
 	// jumps
 	bool exe_jp_addr_pc(CPU* cp);
+	bool exe_jp_hl(CPU* cp);
 
 	bool exe_jr_i8(CPU* cp);
 	bool exe_jr_nz_i8(CPU* cp);
@@ -32,6 +33,15 @@ namespace OPC
 	bool exe_call_z_u16(CPU*);
 	bool exe_call_nc_u16(CPU*);
 	bool exe_call_c_u16(CPU*);
+
+	bool exe_rst_00(CPU*);
+	bool exe_rst_08(CPU*);
+	bool exe_rst_10(CPU*);
+	bool exe_rst_18(CPU*);
+	bool exe_rst_20(CPU*);
+	bool exe_rst_28(CPU*);
+	bool exe_rst_30(CPU*);
+	bool exe_rst_38(CPU*);
 
 	bool exe_ret(CPU*);
 	bool exe_reti(CPU*);
@@ -142,8 +152,30 @@ namespace OPC
 	bool exe_cpl_a(CPU* cp);
 	 
 	// ADD
+	bool exe_add_a_a(CPU* cp);
+	bool exe_add_a_b(CPU* cp);
+	bool exe_add_a_c(CPU* cp);
+	bool exe_add_a_d(CPU* cp);
+	bool exe_add_a_e(CPU* cp);
+	bool exe_add_a_h(CPU* cp);
+	bool exe_add_a_l(CPU* cp);
+	bool exe_add_a_addr_hl(CPU* cp);
+	bool exe_add_a_u8(CPU* cp);
+	bool exe_add_hl_bc(CPU* cp);
+	bool exe_add_hl_de(CPU* cp);
+	bool exe_add_hl_hl(CPU* cp);
+	bool exe_add_hl_sp(CPU* cp);
 
 	// ADC
+	bool exe_adc_a_a(CPU* cp);
+	bool exe_adc_a_b(CPU* cp);
+	bool exe_adc_a_c(CPU* cp);
+	bool exe_adc_a_d(CPU* cp);
+	bool exe_adc_a_e(CPU* cp);
+	bool exe_adc_a_h(CPU* cp);
+	bool exe_adc_a_l(CPU* cp);
+	bool exe_adc_a_addr_hl(CPU* cp);
+	bool exe_adc_a_u8(CPU* cp);
 
 	// SUB
 	bool exe_sub_a_a(CPU* cp);
@@ -238,6 +270,26 @@ namespace OPC
 	bool exe_dec_sp(CPU* cp);
 
 	// EXTENDED OPCODES
+
+	// swap
+	bool exe_swap_a(CPU* cp);
+	bool exe_swap_b(CPU* cp);
+	bool exe_swap_c(CPU* cp);
+	bool exe_swap_d(CPU* cp);
+	bool exe_swap_e(CPU* cp);
+	bool exe_swap_h(CPU* cp);
+	bool exe_swap_l(CPU* cp);
+	bool exe_swap_addr_hl(CPU* cp);
+
+	// res
+	bool exe_res_0_a(CPU* cp);
+	bool exe_res_0_b(CPU* cp);
+	bool exe_res_0_c(CPU* cp);
+	bool exe_res_0_d(CPU* cp);
+	bool exe_res_0_e(CPU* cp);
+	bool exe_res_0_h(CPU* cp);
+	bool exe_res_0_l(CPU* cp);
+	bool exe_res_0_addr_hl(CPU* cp);
 
 	struct opcode {
 

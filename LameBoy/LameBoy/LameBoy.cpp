@@ -41,8 +41,14 @@ int main()
 
         while (1 == 1)
         {
+            if (dohax && cp->reg.pc == 0x2820)
+            {
+                // set 0xff44 to 0x91 so we can continue on
+                cp->ld_addr_val(0xff44, 0x91);
+            }
+
             OPC::opcode op = cp->PeekNextOpcode();
-            if (skip && (cp->reg.pc == stopskip || op.code == 0xc9))
+            if (skip && (cp->reg.pc == stopskip || op.code == 0xef))
             {
                 skip = false;
             }

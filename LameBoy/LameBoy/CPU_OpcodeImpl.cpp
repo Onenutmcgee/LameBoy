@@ -41,6 +41,12 @@ bool CPU::jp_addr(WORD address)
 	return true;
 }
 
+bool CPU::jp_val(WORD val)
+{
+	reg.pc = val;
+	return true;
+}
+
 bool CPU::jr_i8()
 {
 	SIGNED_BYTE val = _mem->ReadSignedByte(reg.pc);
@@ -75,6 +81,11 @@ bool CPU::jr_flag_i8(BYTE flag, bool invert)
 bool CPU::call_u16()
 {
 	WORD addr = FetchNextImmediateWord();
+	return call_addr(addr);
+}
+
+bool CPU::call_addr(WORD addr)
+{
 	push_reg(reg.pc);
 	reg.pc = addr;
 	return true;
@@ -91,9 +102,7 @@ bool CPU::call_flag_u16(BYTE flag, bool invert)
 
 	if (check)
 	{
-		push_reg(reg.pc);
-		reg.pc = addr;
-		return true;
+		return call_addr(addr);
 	}
 	else
 	{
@@ -216,16 +225,46 @@ bool CPU::sub_a_val(BYTE val)
 	return false;
 }
 
+bool CPU::add_a_val(BYTE val)
+{
+	WORD a = reg.a;
+	a += val;
+
+	reg.f = 0x40;
+	if ((reg.a & 0x0f) + (val & 0x0f) > 0x0f)
+		SetFlag(FLAG_H);
+	if (a > 0xFF)
+		SetFlag(FLAG_C);
+	reg.a = (BYTE)(a & 0xFF);
+
+	if (reg.a == 0)
+		SetFlag(FLAG_Z);
+
+	return false;
+}
+
 bool CPU::sub_a_addr(WORD address)
 {
 	BYTE val = _mem->ReadByte(address);
 	return sub_a_val(val);
 }
 
+bool CPU::add_a_addr(WORD address)
+{
+	BYTE val = _mem->ReadByte(address);
+	return add_a_val(val);
+}
+
 bool CPU::sub_a_immediate_u8()
 {
 	BYTE val = FetchNextImmediateByte();
 	return sub_a_val(val);
+}
+
+bool CPU::add_a_immediate_u8()
+{
+	BYTE val = FetchNextImmediateByte();
+	return add_a_val(val);
 }
 
 bool CPU::sub_carry_a_val(BYTE val)
@@ -246,16 +285,46 @@ bool CPU::sub_carry_a_val(BYTE val)
 	return false;
 }
 
+bool CPU::add_carry_a_val(BYTE val)
+{
+	BYTE oldA = reg.a;
+	BYTE carry = TestFlag(FLAG_C) ? 1 : 0;
+
+	int full_result = reg.a + val + carry;
+	reg.a = static_cast<BYTE>(full_result);
+
+	reg.f = 0x40;
+	if (reg.a == 0)
+		SetFlag(FLAG_Z);
+	if (((oldA & 0x0f) + (val & 0x0f) + carry > 0x0f))
+		SetFlag(FLAG_H);
+	if (full_result > 0xFF)
+		SetFlag(FLAG_C);
+	return false;
+}
+
 bool CPU::sub_carry_a_addr(WORD address)
 {
 	BYTE val = _mem->ReadByte(address);
 	return sub_carry_a_val(val);
 }
 
+bool CPU::add_carry_a_addr(WORD address)
+{
+	BYTE val = _mem->ReadByte(address);
+	return add_carry_a_val(val);
+}
+
 bool CPU::sub_carry_a_immediate_u8()
 {
 	BYTE val = FetchNextImmediateByte();
 	return sub_carry_a_val(val);
+}
+
+bool CPU::add_carry_a_immediate_u8()
+{
+	BYTE val = FetchNextImmediateByte();
+	return add_carry_a_val(val);
 }
 
 bool CPU::cp_a_val(BYTE val)
@@ -498,6 +567,23 @@ bool CPU::inc_reg(BYTE* regAddr)
 	return false;
 }
 
+bool CPU::add_hl(WORD val)
+{
+	WORD oldhl = reg.hl;
+	int result = oldhl + val;
+	reg.hl = (WORD)(result & 0xFFFF);
+
+	reg.f &= 0x8f;
+
+	if (((oldhl & 0xFFF) + (val & 0xFFF) & 0x1000) > 0)
+		SetFlag(FLAG_H);
+
+	if (result > 0xFFFF)
+		SetFlag(FLAG_C);
+
+	return false;
+}
+
 bool CPU::dec_reg(WORD* regAddr)
 {
 	(*regAddr)--;
@@ -617,7 +703,7 @@ bool CPU::rl_reg(BYTE* reg_addr)
 	*reg_addr = (val << 1) | (TestFlag(FLAG_C) ? 0x1 : 0x0);
 
 	reg.f = 0;
-	if (bit7 > 0)
+	if (bit7)
 		SetFlag(FLAG_C);
 	if (*reg_addr == 0)
 		SetFlag(FLAG_Z);
@@ -642,7 +728,7 @@ bool CPU::rr_reg(BYTE* reg_addr)
 	*reg_addr = (val >> 1) | (TestFlag(FLAG_C) ? 0x8 : 0x0);
 
 	reg.f = 0;
-	if (bit0 > 0)
+	if (bit0)
 		SetFlag(FLAG_C);
 	if (*reg_addr == 0)
 		SetFlag(FLAG_Z);
@@ -667,7 +753,7 @@ bool CPU::sla_reg(BYTE* reg_addr)
 	*reg_addr = (val << 1) ;
 
 	reg.f = 0;
-	if (bit7 > 0)
+	if (bit7)
 		SetFlag(FLAG_C);
 	if (*reg_addr == 0)
 		SetFlag(FLAG_Z);
@@ -693,7 +779,7 @@ bool CPU::sra_reg(BYTE* reg_addr)
 	*reg_addr = ((val >> 1) | bit7);
 
 	reg.f = 0;
-	if (bit0 > 0)
+	if (bit0)
 		SetFlag(FLAG_C);
 	if (*reg_addr == 0)
 		SetFlag(FLAG_Z);
@@ -718,7 +804,7 @@ bool CPU::srl_reg(BYTE* reg_addr)
 	*reg_addr = (val >> 1);
 
 	reg.f = 0;
-	if (bit0 > 0)
+	if (bit0)
 		SetFlag(FLAG_C);
 	if (*reg_addr == 0)
 		SetFlag(FLAG_Z);

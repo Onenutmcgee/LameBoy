@@ -1,6 +1,87 @@
 ﻿#include "opcode.h"
 #include "CPU.h"
 
+bool OPC::exe_swap_a(CPU* cp)
+{
+	return cp->swap(&cp->reg.a);
+}
+
+bool OPC::exe_swap_b(CPU* cp)
+{
+	return cp->swap(&cp->reg.b);
+}
+
+bool OPC::exe_swap_c(CPU* cp)
+{
+	return cp->swap(&cp->reg.c);
+}
+
+bool OPC::exe_swap_d(CPU* cp)
+{
+	return cp->swap(&cp->reg.d);
+}
+
+bool OPC::exe_swap_e(CPU* cp)
+{
+	return cp->swap(&cp->reg.e);
+}
+
+bool OPC::exe_swap_h(CPU* cp)
+{
+	return cp->swap(&cp->reg.h);
+}
+
+bool OPC::exe_swap_l(CPU* cp)
+{
+	return cp->swap(&cp->reg.l);
+}
+
+bool OPC::exe_swap_addr_hl(CPU* cp)
+{
+	return cp->swap_addr(cp->reg.hl);
+}
+
+// res 0
+bool OPC::exe_res_0_a(CPU* cp)
+{
+	return cp->bit_res(0, &cp->reg.a);
+}
+
+bool OPC::exe_res_0_b(CPU* cp)
+{
+	return cp->bit_res(0, &cp->reg.b);
+}
+
+bool OPC::exe_res_0_c(CPU* cp)
+{
+	return cp->bit_res(0, &cp->reg.c);
+}
+
+bool OPC::exe_res_0_d(CPU* cp)
+{
+	return cp->bit_res(0, &cp->reg.d);
+}
+
+bool OPC::exe_res_0_e(CPU* cp)
+{
+	return cp->bit_res(0, &cp->reg.e);
+}
+
+bool OPC::exe_res_0_h(CPU* cp)
+{
+	return cp->bit_res(0, &cp->reg.h);
+}
+
+bool OPC::exe_res_0_l(CPU* cp)
+{
+	return cp->bit_res(0, &cp->reg.l);
+}
+
+bool OPC::exe_res_0_addr_hl(CPU* cp)
+{
+	return cp->bit_res(0, cp->reg.hl);
+}
+
 struct OPC::opcode OPC::ext_opcodes[256] = {
 			{ 0x00, "RLC B"		, 2, 2, 2, "Z00C", NULL },
 			{ 0x01, "RLC C"		, 2, 2, 2, "Z00C", NULL },
@@ -50,14 +131,14 @@ struct OPC::opcode OPC::ext_opcodes[256] = {
 			{ 0x2D, "SRA L"		, 2, 2, 2, "Z00C", NULL },
 			{ 0x2E, "SRA (HL)"	, 2, 4, 4, "Z00C", NULL },
 			{ 0x2F, "SRA A"		, 2, 2, 2, "Z00C", NULL },
-			{ 0x30, "SWAP B"	, 2, 2, 2, "Z000", NULL },
-			{ 0x31, "SWAP C"	, 2, 2, 2, "Z000", NULL },
-			{ 0x32, "SWAP D"	, 2, 2, 2, "Z000", NULL },
-			{ 0x33, "SWAP E"	, 2, 2, 2, "Z000", NULL },
-			{ 0x34, "SWAP H"	, 2, 2, 2, "Z000", NULL },
-			{ 0x35, "SWAP L"	, 2, 2, 2, "Z000", NULL },
-			{ 0x36, "SWAP (HL)"	, 2, 4, 4, "Z000", NULL },
-			{ 0x37, "SWAP A"	, 2, 2, 2, "Z000", NULL },
+			{ 0x30, "SWAP B"	, 2, 2, 2, "Z000", exe_swap_b },
+			{ 0x31, "SWAP C"	, 2, 2, 2, "Z000", exe_swap_c },
+			{ 0x32, "SWAP D"	, 2, 2, 2, "Z000", exe_swap_d },
+			{ 0x33, "SWAP E"	, 2, 2, 2, "Z000", exe_swap_e },
+			{ 0x34, "SWAP H"	, 2, 2, 2, "Z000", exe_swap_h },
+			{ 0x35, "SWAP L"	, 2, 2, 2, "Z000", exe_swap_l },
+			{ 0x36, "SWAP (HL)"	, 2, 4, 4, "Z000", exe_swap_addr_hl },
+			{ 0x37, "SWAP A"	, 2, 2, 2, "Z000", exe_swap_a },
 			{ 0x38, "SRL B"		, 2, 2, 2, "Z00C", NULL },
 			{ 0x39, "SRL C"		, 2, 2, 2, "Z00C", NULL },
 			{ 0x3A, "SRL D"		, 2, 2, 2, "Z00C", NULL },
@@ -130,14 +211,14 @@ struct OPC::opcode OPC::ext_opcodes[256] = {
 			{ 0x7D, "BIT 7,L"	, 2, 2, 2, "Z01-", NULL },
 			{ 0x7E, "BIT 7,(HL)", 2, 3, 3, "Z01-", NULL },
 			{ 0x7F, "BIT 7,A"	, 2, 2, 2, "Z01-", NULL },
-			{ 0x80, "RES 0,B"	, 2, 2, 2, "----", NULL },
-			{ 0x81, "RES 0,C"	, 2, 2, 2, "----", NULL },
-			{ 0x82, "RES 0,D"	, 2, 2, 2, "----", NULL },
-			{ 0x83, "RES 0,E"	, 2, 2, 2, "----", NULL },
-			{ 0x84, "RES 0,H"	, 2, 2, 2, "----", NULL },
-			{ 0x85, "RES 0,L"	, 2, 2, 2, "----", NULL },
-			{ 0x86, "RES 0,(HL)", 2, 4, 4, "----", NULL },
-			{ 0x87, "RES 0,A"	, 2, 2, 2, "----", NULL },
+			{ 0x80, "RES 0,B"	, 2, 2, 2, "----", exe_res_0_b },
+			{ 0x81, "RES 0,C"	, 2, 2, 2, "----", exe_res_0_c },
+			{ 0x82, "RES 0,D"	, 2, 2, 2, "----", exe_res_0_d },
+			{ 0x83, "RES 0,E"	, 2, 2, 2, "----", exe_res_0_e },
+			{ 0x84, "RES 0,H"	, 2, 2, 2, "----", exe_res_0_h },
+			{ 0x85, "RES 0,L"	, 2, 2, 2, "----", exe_res_0_l },
+			{ 0x86, "RES 0,(HL)", 2, 4, 4, "----", exe_res_0_addr_hl },
+			{ 0x87, "RES 0,A"	, 2, 2, 2, "----", exe_res_0_a },
 			{ 0x88, "RES 1,B"	, 2, 2, 2, "----", NULL },
 			{ 0x89, "RES 1,C"	, 2, 2, 2, "----", NULL },
 			{ 0x8A, "RES 1,D"	, 2, 2, 2, "----", NULL },
