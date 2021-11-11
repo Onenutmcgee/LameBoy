@@ -18,7 +18,8 @@ int main()
 
     std::cout << game.Title() << '\n' << Translator::CartType(game.CartType()) << '\n';
 
-    CPU* cp = new CPU(&game);
+    MemoryManager* mem = new MemoryManager(&game);
+    CPU* cp = new CPU(&game, mem);
     BYTE cycles;
 
     bool skip = true;
@@ -74,6 +75,8 @@ int main()
             {
                 cp->ExecuteNextOpcode(&cycles);
             }
+
+            cp->HandleInterrupts();
         }
     }
     catch(const OpcodeNotImplException& ex)

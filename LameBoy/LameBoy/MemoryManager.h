@@ -20,6 +20,9 @@ public:
 	void WriteByte(WORD, BYTE);
 	void WriteWord(WORD address, WORD value);
 
+	void RequestInterrupt(BYTE id);
+	void ClearInterrupt(BYTE id);
+
 private:
 	const WORD VRAM_OFFSET		= 0x8000;
 	const WORD CART_RAM_OFFSET	= 0xA000;
@@ -30,6 +33,8 @@ private:
 	const WORD BANK_RAM_ENABLE_CUTTOFF = 0x2000;
 	const WORD BANK_ROM_CHANGE_LO_CUTTOFF = 0x4000;
 	const WORD BANK_ROM_CHANGE_HI_CUTTOFF = 0x6000;
+
+	const WORD IF_REGISTER = 0xFF0F;
 
 	GamePak* _cart;
 	BYTE* _vram;

@@ -12,7 +12,7 @@
 class CPU
 {
 public:
-	CPU(GamePak* cart);
+	CPU(GamePak* cart, MemoryManager* mem);
 	~CPU();
 
 	Registers reg;
@@ -22,6 +22,8 @@ public:
 	OPC::opcode ExecuteNextOpcode(BYTE*);
 	OPC::opcode PeekNextOpcode();
 	
+	void HandleInterrupts();
+
 	bool nop();
 	bool daa();
 	bool scf();
@@ -152,8 +154,10 @@ private:
 	bool TestFlag(BYTE);
 	BYTE swap(BYTE);
 
+	void ServiceInterrupt(BYTE);
 	BYTE FetchNextImmediateByte();
 	WORD FetchNextImmediateWord();
+
 
 	MemoryManager* _mem;
 	GamePak* _cart;

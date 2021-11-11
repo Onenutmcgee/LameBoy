@@ -150,3 +150,21 @@ void MemoryManager::HandleBanking(WORD address, BYTE value)
 		// changes ram/rom mode for MBC1.  ROM only doesn't use
 	}
 }
+
+void MemoryManager::RequestInterrupt(BYTE id)
+{
+	BYTE interruptReg = ReadByte(IF_REGISTER);
+	
+	interruptReg |= (1 << id);
+
+	WriteByte(IF_REGISTER, interruptReg);
+}
+
+void MemoryManager::ClearInterrupt(BYTE id)
+{
+	BYTE interruptReg = ReadByte(IF_REGISTER);
+
+	interruptReg &= ~(1 << id);
+
+	WriteByte(IF_REGISTER, interruptReg);
+}

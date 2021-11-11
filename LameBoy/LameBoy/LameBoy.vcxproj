@@ -146,7 +146,7 @@
     <ClCompile Include="MemoryManager.cpp" />
     <ClCompile Include="opcode.cpp" />
     <ClCompile Include="CPU_OpcodeImpl.cpp" />
-    <ClCompile Include="Registers.cpp" />
+    <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CPU.h" />
@@ -155,6 +155,7 @@
     <ClInclude Include="MemoryManager.h" />
     <ClInclude Include="opcode.h" />
     <ClInclude Include="Registers.h" />
+    <ClInclude Include="Timer.h" />
     <ClInclude Include="Translator.h" />
     <ClInclude Include="TypeDefs.h" />
   </ItemGroup>

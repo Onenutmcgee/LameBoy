@@ -1,17 +1,16 @@
 #include "CPU.h"
 #include "OpcodeNotImplementedException.h"
 
-CPU::CPU(GamePak* cart)
+CPU::CPU(GamePak* cart, MemoryManager* mem)
 {
 	this->_cart = cart;
-	this->_mem = new MemoryManager(cart);
+	this->_mem = mem;
 
 	Initialize();
 }
 
 CPU::~CPU()
 {
-	delete _mem;
 }
 
 void CPU::Initialize()
@@ -62,6 +61,61 @@ OPC::opcode CPU::ExecuteNextOpcode(BYTE* cycles)
 	}
 	
 	return code;
+}
+
+void CPU::HandleInterrupts()
+{
+	if (interrupts_enabled)
+	{
+		BYTE interruptRegister = _mem->ReadByte(0xFF0F);
+		BYTE ieRegister = _mem->ReadByte(0xFFFF) & 0x1F;
+
+		if (interruptRegister > 0)
+		{ // there are interrupt(s)
+			// we only care if the interrupts are enabled
+			interruptRegister &= ieRegister;
+
+			if (interruptRegister > 0)
+			{ // we have an enabled interrupt
+				BYTE interruptBit = 0;
+				bool found = false;
+
+				while (!found && interruptBit < 5)
+				{
+					found = (interruptRegister & (1 << interruptBit));
+					if (!found)
+						interruptBit++;
+				}
+
+				if (found)
+					ServiceInterrupt(interruptBit);
+			}
+		}
+	}
+}
+
+void CPU::ServiceInterrupt(BYTE id)
+{
+	bit_res(id, (WORD)0xFF0F);
+	interrupts_enabled = false;
+
+	push_reg(reg.pc);
+
+	switch (id)
+	{
+	case INTERRUPT_VBLANK:
+		reg.pc = 0x40;
+		break;
+	case INTERRUPT_LCD:
+		reg.pc = 0x48;
+		break;
+	case INTERRUPT_TIMER:
+		reg.pc = 0x50;
+		break;
+	case INTERRUPT_JOYPAD:
+		reg.pc = 0x60;
+		break;
+	}
 }
 
 BYTE CPU::FetchNextImmediateByte()

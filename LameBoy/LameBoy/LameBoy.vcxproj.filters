@@ -33,9 +33,6 @@
     <ClCompile Include="LameBoy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Registers.cpp">
-      <Filter>Source Files\Emulator</Filter>
-    </ClCompile>
     <ClCompile Include="MemoryManager.cpp">
       <Filter>Source Files\Emulator</Filter>
     </ClCompile>
@@ -52,6 +49,9 @@
       <Filter>Source Files\Emulator</Filter>
     </ClCompile>
     <ClCompile Include="ext_opcode.cpp">
+      <Filter>Source Files\Emulator</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
       <Filter>Source Files\Emulator</Filter>
     </ClCompile>
   </ItemGroup>
@@ -79,6 +79,9 @@
     </ClInclude>
     <ClInclude Include="OpcodeNotImplementedException.h">
       <Filter>Header Files\Exceptions</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

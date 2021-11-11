@@ -17,3 +17,8 @@ typedef signed short SIGNED_WORD;
 #define CART_TYPE_MBC2_BATT			6
 #define CART_TYPE_ROM_RAM			9
 
+#define INTERRUPT_VBLANK	0
+#define INTERRUPT_LCD		1
+#define INTERRUPT_TIMER		2
+#define INTERRUPT_SERIAL	3
+#define INTERRUPT_JOYPAD	4
