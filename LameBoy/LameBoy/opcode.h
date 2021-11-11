@@ -22,6 +22,11 @@ namespace OPC
 	bool exe_jp_addr_pc(CPU* cp);
 	bool exe_jp_hl(CPU* cp);
 
+	bool exe_jp_nz_u16(CPU* cp);
+	bool exe_jp_z_u16(CPU* cp);
+	bool exe_jp_nc_u16(CPU* cp);
+	bool exe_jp_c_u16(CPU* cp);
+
 	bool exe_jr_i8(CPU* cp);
 	bool exe_jr_nz_i8(CPU* cp);
 	bool exe_jr_z_i8(CPU* cp);

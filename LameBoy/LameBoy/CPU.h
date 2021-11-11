@@ -30,6 +30,7 @@ public:
 	// jumps
 	bool jp_addr(WORD);
 	bool jp_val(WORD);
+	bool jp_flag_u16(BYTE flag, bool invert);
 	bool jr_i8();
 	bool jr_flag_i8(BYTE flag, bool invert);
 	bool call_u16();

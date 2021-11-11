@@ -47,6 +47,26 @@ bool CPU::jp_val(WORD val)
 	return true;
 }
 
+bool CPU::jp_flag_u16(BYTE flag, bool invert)
+{
+	WORD val = FetchNextImmediateWord();
+
+	bool check = TestFlag(flag);
+
+	if (invert)
+		check = !check;
+
+	if (check)
+	{
+		reg.pc = val;
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
 bool CPU::jr_i8()
 {
 	SIGNED_BYTE val = _mem->ReadSignedByte(reg.pc);

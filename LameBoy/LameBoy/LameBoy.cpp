@@ -22,13 +22,15 @@ int main()
     BYTE cycles;
 
     bool skip = true;
-    WORD stopskip = 0x2a4;
+    WORD stopskip = 0x2cd;
     WORD MainLoop = 0x02c4;
     
     if (dohax)
     {
         // set 0xff44 to 0x94 so that we can continue loading without PPU emulation
         cp->ld_addr_val(0xff44, 0x94);
+
+        cp->ld_addr_val(0xff80, 0x00);
     }
 
     if (skip)
@@ -46,10 +48,16 @@ int main()
                 // set 0xff44 to 0x91 so we can continue on
                 cp->ld_addr_val(0xff44, 0x91);
             }
+            if (dohax && cp->reg.pc == 0x0233)
+            {
+                // set 0xff44 to 0x91 so we can continue on
+                cp->ld_addr_val(0xff44, 0x94);
+            }
 
             OPC::opcode op = cp->PeekNextOpcode();
-            if (skip && (cp->reg.pc == stopskip || op.code == 0xef))
+            if (skip && (cp->reg.pc == stopskip))
             {
+                cp->ld_addr_val(0xff80, 0x00);
                 skip = false;
             }
 
@@ -58,8 +66,14 @@ int main()
                 std::cout << "PC: 0x" << std::setw(4) << std::setfill('0') << std::hex << +(cp->reg.pc) << "   0x" << std::setw(2) << std::setfill('0') << std::hex << +(op.code) << " " << op.disassembly << '\n';
             }
 
-            cp->ExecuteNextOpcode(&cycles);
-
+            if (skip)
+            {
+                cp->ExecuteNextOpcode(&cycles);
+            }
+            if (!skip)
+            {
+                cp->ExecuteNextOpcode(&cycles);
+            }
         }
     }
     catch(const OpcodeNotImplException& ex)
