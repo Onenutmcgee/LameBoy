@@ -291,6 +291,215 @@ namespace OPC
 	bool exe_res_0_l(CPU* cp);
 	bool exe_res_0_addr_hl(CPU* cp);
 
+	bool exe_res_1_a(CPU* cp);
+	bool exe_res_1_b(CPU* cp);
+	bool exe_res_1_c(CPU* cp);
+	bool exe_res_1_d(CPU* cp);
+	bool exe_res_1_e(CPU* cp);
+	bool exe_res_1_h(CPU* cp);
+	bool exe_res_1_l(CPU* cp);
+	bool exe_res_1_addr_hl(CPU* cp);
+
+	bool exe_res_2_a(CPU* cp);
+	bool exe_res_2_b(CPU* cp);
+	bool exe_res_2_c(CPU* cp);
+	bool exe_res_2_d(CPU* cp);
+	bool exe_res_2_e(CPU* cp);
+	bool exe_res_2_h(CPU* cp);
+	bool exe_res_2_l(CPU* cp);
+	bool exe_res_2_addr_hl(CPU* cp);
+
+	bool exe_res_3_a(CPU* cp);
+	bool exe_res_3_b(CPU* cp);
+	bool exe_res_3_c(CPU* cp);
+	bool exe_res_3_d(CPU* cp);
+	bool exe_res_3_e(CPU* cp);
+	bool exe_res_3_h(CPU* cp);
+	bool exe_res_3_l(CPU* cp);
+	bool exe_res_3_addr_hl(CPU* cp);
+
+	bool exe_res_4_a(CPU* cp);
+	bool exe_res_4_b(CPU* cp);
+	bool exe_res_4_c(CPU* cp);
+	bool exe_res_4_d(CPU* cp);
+	bool exe_res_4_e(CPU* cp);
+	bool exe_res_4_h(CPU* cp);
+	bool exe_res_4_l(CPU* cp);
+	bool exe_res_4_addr_hl(CPU* cp);
+
+	bool exe_res_5_a(CPU* cp);
+	bool exe_res_5_b(CPU* cp);
+	bool exe_res_5_c(CPU* cp);
+	bool exe_res_5_d(CPU* cp);
+	bool exe_res_5_e(CPU* cp);
+	bool exe_res_5_h(CPU* cp);
+	bool exe_res_5_l(CPU* cp);
+	bool exe_res_5_addr_hl(CPU* cp);
+
+	bool exe_res_6_a(CPU* cp);
+	bool exe_res_6_b(CPU* cp);
+	bool exe_res_6_c(CPU* cp);
+	bool exe_res_6_d(CPU* cp);
+	bool exe_res_6_e(CPU* cp);
+	bool exe_res_6_h(CPU* cp);
+	bool exe_res_6_l(CPU* cp);
+	bool exe_res_6_addr_hl(CPU* cp);
+
+	bool exe_res_7_a(CPU* cp);
+	bool exe_res_7_b(CPU* cp);
+	bool exe_res_7_c(CPU* cp);
+	bool exe_res_7_d(CPU* cp);
+	bool exe_res_7_e(CPU* cp);
+	bool exe_res_7_h(CPU* cp);
+	bool exe_res_7_l(CPU* cp);
+	bool exe_res_7_addr_hl(CPU* cp);
+
+	//set
+	bool exe_set_0_a(CPU* cp);
+	bool exe_set_0_b(CPU* cp);
+	bool exe_set_0_c(CPU* cp);
+	bool exe_set_0_d(CPU* cp);
+	bool exe_set_0_e(CPU* cp);
+	bool exe_set_0_h(CPU* cp);
+	bool exe_set_0_l(CPU* cp);
+	bool exe_set_0_addr_hl(CPU* cp);
+
+	bool exe_set_1_a(CPU* cp);
+	bool exe_set_1_b(CPU* cp);
+	bool exe_set_1_c(CPU* cp);
+	bool exe_set_1_d(CPU* cp);
+	bool exe_set_1_e(CPU* cp);
+	bool exe_set_1_h(CPU* cp);
+	bool exe_set_1_l(CPU* cp);
+	bool exe_set_1_addr_hl(CPU* cp);
+
+	bool exe_set_2_a(CPU* cp);
+	bool exe_set_2_b(CPU* cp);
+	bool exe_set_2_c(CPU* cp);
+	bool exe_set_2_d(CPU* cp);
+	bool exe_set_2_e(CPU* cp);
+	bool exe_set_2_h(CPU* cp);
+	bool exe_set_2_l(CPU* cp);
+	bool exe_set_2_addr_hl(CPU* cp);
+
+	bool exe_set_3_a(CPU* cp);
+	bool exe_set_3_b(CPU* cp);
+	bool exe_set_3_c(CPU* cp);
+	bool exe_set_3_d(CPU* cp);
+	bool exe_set_3_e(CPU* cp);
+	bool exe_set_3_h(CPU* cp);
+	bool exe_set_3_l(CPU* cp);
+	bool exe_set_3_addr_hl(CPU* cp);
+
+	bool exe_set_4_a(CPU* cp);
+	bool exe_set_4_b(CPU* cp);
+	bool exe_set_4_c(CPU* cp);
+	bool exe_set_4_d(CPU* cp);
+	bool exe_set_4_e(CPU* cp);
+	bool exe_set_4_h(CPU* cp);
+	bool exe_set_4_l(CPU* cp);
+	bool exe_set_4_addr_hl(CPU* cp);
+
+	bool exe_set_5_a(CPU* cp);
+	bool exe_set_5_b(CPU* cp);
+	bool exe_set_5_c(CPU* cp);
+	bool exe_set_5_d(CPU* cp);
+	bool exe_set_5_e(CPU* cp);
+	bool exe_set_5_h(CPU* cp);
+	bool exe_set_5_l(CPU* cp);
+	bool exe_set_5_addr_hl(CPU* cp);
+
+	bool exe_set_6_a(CPU* cp);
+	bool exe_set_6_b(CPU* cp);
+	bool exe_set_6_c(CPU* cp);
+	bool exe_set_6_d(CPU* cp);
+	bool exe_set_6_e(CPU* cp);
+	bool exe_set_6_h(CPU* cp);
+	bool exe_set_6_l(CPU* cp);
+	bool exe_set_6_addr_hl(CPU* cp);
+
+	bool exe_set_7_a(CPU* cp);
+	bool exe_set_7_b(CPU* cp);
+	bool exe_set_7_c(CPU* cp);
+	bool exe_set_7_d(CPU* cp);
+	bool exe_set_7_e(CPU* cp);
+	bool exe_set_7_h(CPU* cp);
+	bool exe_set_7_l(CPU* cp);
+	bool exe_set_7_addr_hl(CPU* cp);
+
+	//test
+	bool exe_test_0_a(CPU* cp);
+	bool exe_test_0_b(CPU* cp);
+	bool exe_test_0_c(CPU* cp);
+	bool exe_test_0_d(CPU* cp);
+	bool exe_test_0_e(CPU* cp);
+	bool exe_test_0_h(CPU* cp);
+	bool exe_test_0_l(CPU* cp);
+	bool exe_test_0_addr_hl(CPU* cp);
+
+	bool exe_test_1_a(CPU* cp);
+	bool exe_test_1_b(CPU* cp);
+	bool exe_test_1_c(CPU* cp);
+	bool exe_test_1_d(CPU* cp);
+	bool exe_test_1_e(CPU* cp);
+	bool exe_test_1_h(CPU* cp);
+	bool exe_test_1_l(CPU* cp);
+	bool exe_test_1_addr_hl(CPU* cp);
+
+	bool exe_test_2_a(CPU* cp);
+	bool exe_test_2_b(CPU* cp);
+	bool exe_test_2_c(CPU* cp);
+	bool exe_test_2_d(CPU* cp);
+	bool exe_test_2_e(CPU* cp);
+	bool exe_test_2_h(CPU* cp);
+	bool exe_test_2_l(CPU* cp);
+	bool exe_test_2_addr_hl(CPU* cp);
+
+	bool exe_test_3_a(CPU* cp);
+	bool exe_test_3_b(CPU* cp);
+	bool exe_test_3_c(CPU* cp);
+	bool exe_test_3_d(CPU* cp);
+	bool exe_test_3_e(CPU* cp);
+	bool exe_test_3_h(CPU* cp);
+	bool exe_test_3_l(CPU* cp);
+	bool exe_test_3_addr_hl(CPU* cp);
+
+	bool exe_test_4_a(CPU* cp);
+	bool exe_test_4_b(CPU* cp);
+	bool exe_test_4_c(CPU* cp);
+	bool exe_test_4_d(CPU* cp);
+	bool exe_test_4_e(CPU* cp);
+	bool exe_test_4_h(CPU* cp);
+	bool exe_test_4_l(CPU* cp);
+	bool exe_test_4_addr_hl(CPU* cp);
+
+	bool exe_test_5_a(CPU* cp);
+	bool exe_test_5_b(CPU* cp);
+	bool exe_test_5_c(CPU* cp);
+	bool exe_test_5_d(CPU* cp);
+	bool exe_test_5_e(CPU* cp);
+	bool exe_test_5_h(CPU* cp);
+	bool exe_test_5_l(CPU* cp);
+	bool exe_test_5_addr_hl(CPU* cp);
+
+	bool exe_test_6_a(CPU* cp);
+	bool exe_test_6_b(CPU* cp);
+	bool exe_test_6_c(CPU* cp);
+	bool exe_test_6_d(CPU* cp);
+	bool exe_test_6_e(CPU* cp);
+	bool exe_test_6_h(CPU* cp);
+	bool exe_test_6_l(CPU* cp);
+	bool exe_test_6_addr_hl(CPU* cp);
+
+	bool exe_test_7_a(CPU* cp);
+	bool exe_test_7_b(CPU* cp);
+	bool exe_test_7_c(CPU* cp);
+	bool exe_test_7_d(CPU* cp);
+	bool exe_test_7_e(CPU* cp);
+	bool exe_test_7_h(CPU* cp);
+	bool exe_test_7_l(CPU* cp);
+	bool exe_test_7_addr_hl(CPU* cp);
+
 	struct opcode {
 
 		WORD code;
