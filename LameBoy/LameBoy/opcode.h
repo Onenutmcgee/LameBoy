@@ -271,6 +271,69 @@ namespace OPC
 
 	// EXTENDED OPCODES
 
+	bool exe_rlc_a(CPU* cp);
+	bool exe_rlc_b(CPU* cp);
+	bool exe_rlc_c(CPU* cp);
+	bool exe_rlc_d(CPU* cp);
+	bool exe_rlc_e(CPU* cp);
+	bool exe_rlc_h(CPU* cp);
+	bool exe_rlc_l(CPU* cp);
+	bool exe_rlc_addr_hl(CPU* cp);
+
+	bool exe_rrc_a(CPU* cp);
+	bool exe_rrc_b(CPU* cp);
+	bool exe_rrc_c(CPU* cp);
+	bool exe_rrc_d(CPU* cp);
+	bool exe_rrc_e(CPU* cp);
+	bool exe_rrc_h(CPU* cp);
+	bool exe_rrc_l(CPU* cp);
+	bool exe_rrc_addr_hl(CPU* cp);
+
+	bool exe_rl_a(CPU* cp);
+	bool exe_rl_b(CPU* cp);
+	bool exe_rl_c(CPU* cp);
+	bool exe_rl_d(CPU* cp);
+	bool exe_rl_e(CPU* cp);
+	bool exe_rl_h(CPU* cp);
+	bool exe_rl_l(CPU* cp);
+	bool exe_rl_addr_hl(CPU* cp);
+
+	bool exe_rr_a(CPU* cp);
+	bool exe_rr_b(CPU* cp);
+	bool exe_rr_c(CPU* cp);
+	bool exe_rr_d(CPU* cp);
+	bool exe_rr_e(CPU* cp);
+	bool exe_rr_h(CPU* cp);
+	bool exe_rr_l(CPU* cp);
+	bool exe_rr_addr_hl(CPU* cp);
+
+	bool exe_sla_a(CPU* cp);
+	bool exe_sla_b(CPU* cp);
+	bool exe_sla_c(CPU* cp);
+	bool exe_sla_d(CPU* cp);
+	bool exe_sla_e(CPU* cp);
+	bool exe_sla_h(CPU* cp);
+	bool exe_sla_l(CPU* cp);
+	bool exe_sla_addr_hl(CPU* cp);
+
+	bool exe_sra_a(CPU* cp);
+	bool exe_sra_b(CPU* cp);
+	bool exe_sra_c(CPU* cp);
+	bool exe_sra_d(CPU* cp);
+	bool exe_sra_e(CPU* cp);
+	bool exe_sra_h(CPU* cp);
+	bool exe_sra_l(CPU* cp);
+	bool exe_sra_addr_hl(CPU* cp);
+
+	bool exe_srl_a(CPU* cp);
+	bool exe_srl_b(CPU* cp);
+	bool exe_srl_c(CPU* cp);
+	bool exe_srl_d(CPU* cp);
+	bool exe_srl_e(CPU* cp);
+	bool exe_srl_h(CPU* cp);
+	bool exe_srl_l(CPU* cp);
+	bool exe_srl_addr_hl(CPU* cp);
+
 	// swap
 	bool exe_swap_a(CPU* cp);
 	bool exe_swap_b(CPU* cp);

@@ -1,6 +1,286 @@
 ﻿#include "opcode.h"
 #include "CPU.h"
 
+bool OPC::exe_rlc_a(CPU* cp)
+{
+	return cp->rlc_reg(&cp->reg.a);
+}
+
+bool OPC::exe_rlc_b(CPU* cp)
+{
+	return cp->rlc_reg(&cp->reg.b);
+}
+
+bool OPC::exe_rlc_c(CPU* cp)
+{
+	return cp->rlc_reg(&cp->reg.c);
+}
+
+bool OPC::exe_rlc_d(CPU* cp)
+{
+	return cp->rlc_reg(&cp->reg.d);
+}
+
+bool OPC::exe_rlc_e(CPU* cp)
+{
+	return cp->rlc_reg(&cp->reg.e);
+}
+
+bool OPC::exe_rlc_h(CPU* cp)
+{
+	return cp->rlc_reg(&cp->reg.h);
+}
+
+bool OPC::exe_rlc_l(CPU* cp)
+{
+	return cp->rlc_reg(&cp->reg.l);
+}
+
+bool OPC::exe_rlc_addr_hl(CPU* cp)
+{
+	return cp->rlc_addr(cp->reg.hl);
+}
+
+bool OPC::exe_rrc_a(CPU* cp)
+{
+	return cp->rrc_reg(&cp->reg.a);
+}
+
+bool OPC::exe_rrc_b(CPU* cp)
+{
+	return cp->rrc_reg(&cp->reg.b);
+}
+
+bool OPC::exe_rrc_c(CPU* cp)
+{
+	return cp->rrc_reg(&cp->reg.c);
+}
+
+bool OPC::exe_rrc_d(CPU* cp)
+{
+	return cp->rrc_reg(&cp->reg.d);
+}
+
+bool OPC::exe_rrc_e(CPU* cp)
+{
+	return cp->rrc_reg(&cp->reg.e);
+}
+
+bool OPC::exe_rrc_h(CPU* cp)
+{
+	return cp->rrc_reg(&cp->reg.h);
+}
+
+bool OPC::exe_rrc_l(CPU* cp)
+{
+	return cp->rrc_reg(&cp->reg.l);
+}
+
+bool OPC::exe_rrc_addr_hl(CPU* cp)
+{
+	return cp->rrc_addr(cp->reg.hl);
+}
+
+bool OPC::exe_rl_a(CPU* cp)
+{
+	return cp->rl_reg(&cp->reg.a);
+}
+
+bool OPC::exe_rl_b(CPU* cp)
+{
+	return cp->rl_reg(&cp->reg.b);
+}
+
+bool OPC::exe_rl_c(CPU* cp)
+{
+	return cp->rl_reg(&cp->reg.c);
+}
+
+bool OPC::exe_rl_d(CPU* cp)
+{
+	return cp->rl_reg(&cp->reg.d);
+}
+
+bool OPC::exe_rl_e(CPU* cp)
+{
+	return cp->rl_reg(&cp->reg.e);
+}
+
+bool OPC::exe_rl_h(CPU* cp)
+{
+	return cp->rl_reg(&cp->reg.h);
+}
+
+bool OPC::exe_rl_l(CPU* cp)
+{
+	return cp->rl_reg(&cp->reg.l);
+}
+
+bool OPC::exe_rl_addr_hl(CPU* cp)
+{
+	return cp->rl_addr(cp->reg.hl);
+}
+
+bool OPC::exe_rr_a(CPU* cp)
+{
+	return cp->rr_reg(&cp->reg.a);
+}
+
+bool OPC::exe_rr_b(CPU* cp)
+{
+	return cp->rr_reg(&cp->reg.b);
+}
+
+bool OPC::exe_rr_c(CPU* cp)
+{
+	return cp->rr_reg(&cp->reg.c);
+}
+
+bool OPC::exe_rr_d(CPU* cp)
+{
+	return cp->rr_reg(&cp->reg.d);
+}
+
+bool OPC::exe_rr_e(CPU* cp)
+{
+	return cp->rr_reg(&cp->reg.e);
+}
+
+bool OPC::exe_rr_h(CPU* cp)
+{
+	return cp->rr_reg(&cp->reg.h);
+}
+
+bool OPC::exe_rr_l(CPU* cp)
+{
+	return cp->rr_reg(&cp->reg.l);
+}
+
+bool OPC::exe_rr_addr_hl(CPU* cp)
+{
+	return cp->rr_addr(cp->reg.hl);
+}
+
+bool OPC::exe_sla_a(CPU* cp)
+{
+	return cp->sla_reg(&cp->reg.a);
+}
+
+bool OPC::exe_sla_b(CPU* cp)
+{
+	return cp->sla_reg(&cp->reg.b);
+}
+
+bool OPC::exe_sla_c(CPU* cp)
+{
+	return cp->sla_reg(&cp->reg.c);
+}
+
+bool OPC::exe_sla_d(CPU* cp)
+{
+	return cp->sla_reg(&cp->reg.d);
+}
+
+bool OPC::exe_sla_e(CPU* cp)
+{
+	return cp->sla_reg(&cp->reg.e);
+}
+
+bool OPC::exe_sla_h(CPU* cp)
+{
+	return cp->sla_reg(&cp->reg.h);
+}
+
+bool OPC::exe_sla_l(CPU* cp)
+{
+	return cp->sla_reg(&cp->reg.l);
+}
+
+bool OPC::exe_sla_addr_hl(CPU* cp)
+{
+	return cp->sla_addr(cp->reg.hl);
+}
+
+bool OPC::exe_sra_a(CPU* cp)
+{
+	return cp->sra_reg(&cp->reg.a);
+}
+
+bool OPC::exe_sra_b(CPU* cp)
+{
+	return cp->sra_reg(&cp->reg.b);
+}
+
+bool OPC::exe_sra_c(CPU* cp)
+{
+	return cp->sra_reg(&cp->reg.c);
+}
+
+bool OPC::exe_sra_d(CPU* cp)
+{
+	return cp->sra_reg(&cp->reg.d);
+}
+
+bool OPC::exe_sra_e(CPU* cp)
+{
+	return cp->sra_reg(&cp->reg.e);
+}
+
+bool OPC::exe_sra_h(CPU* cp)
+{
+	return cp->sra_reg(&cp->reg.h);
+}
+
+bool OPC::exe_sra_l(CPU* cp)
+{
+	return cp->sra_reg(&cp->reg.l);
+}
+
+bool OPC::exe_sra_addr_hl(CPU* cp)
+{
+	return cp->sra_addr(cp->reg.hl);
+}
+
+bool OPC::exe_srl_a(CPU* cp)
+{
+	return cp->srl_reg(&cp->reg.a);
+}
+
+bool OPC::exe_srl_b(CPU* cp)
+{
+	return cp->srl_reg(&cp->reg.b);
+}
+
+bool OPC::exe_srl_c(CPU* cp)
+{
+	return cp->srl_reg(&cp->reg.c);
+}
+
+bool OPC::exe_srl_d(CPU* cp)
+{
+	return cp->srl_reg(&cp->reg.d);
+}
+
+bool OPC::exe_srl_e(CPU* cp)
+{
+	return cp->srl_reg(&cp->reg.e);
+}
+
+bool OPC::exe_srl_h(CPU* cp)
+{
+	return cp->srl_reg(&cp->reg.h);
+}
+
+bool OPC::exe_srl_l(CPU* cp)
+{
+	return cp->srl_reg(&cp->reg.l);
+}
+
+bool OPC::exe_srl_addr_hl(CPU* cp)
+{
+	return cp->srl_addr(cp->reg.hl);
+}
+
 bool OPC::exe_swap_a(CPU* cp)
 {
 	return cp->swap(&cp->reg.a);
@@ -1004,54 +1284,54 @@ bool OPC::exe_test_7_addr_hl(CPU* cp)
 }
 
 struct OPC::opcode OPC::ext_opcodes[256] = {
-			{ 0x00, "RLC B"		, 2, 2, 2, "Z00C", NULL },
-			{ 0x01, "RLC C"		, 2, 2, 2, "Z00C", NULL },
-			{ 0x02, "RLC D"		, 2, 2, 2, "Z00C", NULL },
-			{ 0x03, "RLC E"		, 2, 2, 2, "Z00C", NULL },
-			{ 0x04, "RLC H"		, 2, 2, 2, "Z00C", NULL },
-			{ 0x05, "RLC L"		, 2, 2, 2, "Z00C", NULL },
-			{ 0x06, "RLC (HL)"	, 2, 4, 4, "Z00C", NULL },
-			{ 0x07, "RLC A"		, 2, 2, 2, "Z00C", NULL },
-			{ 0x08, "RRC B"		, 2, 2, 2, "Z00C", NULL },
-			{ 0x09, "RRC C"		, 2, 2, 2, "Z00C", NULL },
-			{ 0x0A, "RRC D"		, 2, 2, 2, "Z00C", NULL },
-			{ 0x0B, "RRC E"		, 2, 2, 2, "Z00C", NULL },
-			{ 0x0C, "RRC H"		, 2, 2, 2, "Z00C", NULL },
-			{ 0x0D, "RRC L"		, 2, 2, 2, "Z00C", NULL },
-			{ 0x0E, "RRC (HL)"	, 2, 4, 4, "Z00C", NULL },
-			{ 0x0F, "RRC A"		, 2, 2, 2, "Z00C", NULL },
-			{ 0x10, "RL B"		, 2, 2, 2, "Z00C", NULL },
-			{ 0x11, "RL C"		, 2, 2, 2, "Z00C", NULL },
-			{ 0x12, "RL D"		, 2, 2, 2, "Z00C", NULL },
-			{ 0x13, "RL E"		, 2, 2, 2, "Z00C", NULL },
-			{ 0x14, "RL H"		, 2, 2, 2, "Z00C", NULL },
-			{ 0x15, "RL L"		, 2, 2, 2, "Z00C", NULL },
-			{ 0x16, "RL (HL)"	, 2, 4, 4, "Z00C", NULL },
-			{ 0x17, "RL A"		, 2, 2, 2, "Z00C", NULL },
-			{ 0x18, "RR B"		, 2, 2, 2, "Z00C", NULL },
-			{ 0x19, "RR C"		, 2, 2, 2, "Z00C", NULL },
-			{ 0x1A, "RR D"		, 2, 2, 2, "Z00C", NULL },
-			{ 0x1B, "RR E"		, 2, 2, 2, "Z00C", NULL },
-			{ 0x1C, "RR H"		, 2, 2, 2, "Z00C", NULL },
-			{ 0x1D, "RR L"		, 2, 2, 2, "Z00C", NULL },
-			{ 0x1E, "RR (HL)"	, 2, 4, 4, "Z00C", NULL },
-			{ 0x1F, "RR A"		, 2, 2, 2, "Z00C", NULL },
-			{ 0x20, "SLA B"		, 2, 2, 2, "Z00C", NULL },
-			{ 0x21, "SLA C"		, 2, 2, 2, "Z00C", NULL },
-			{ 0x22, "SLA D"		, 2, 2, 2, "Z00C", NULL },
-			{ 0x23, "SLA E"		, 2, 2, 2, "Z00C", NULL },
-			{ 0x24, "SLA H"		, 2, 2, 2, "Z00C", NULL },
-			{ 0x25, "SLA L"		, 2, 2, 2, "Z00C", NULL },
-			{ 0x26, "SLA (HL)"	, 2, 4, 4, "Z00C", NULL },
-			{ 0x27, "SLA A"		, 2, 2, 2, "Z00C", NULL },
-			{ 0x28, "SRA B"		, 2, 2, 2, "Z00C", NULL },
-			{ 0x29, "SRA C"		, 2, 2, 2, "Z00C", NULL },
-			{ 0x2A, "SRA D"		, 2, 2, 2, "Z00C", NULL },
-			{ 0x2B, "SRA E"		, 2, 2, 2, "Z00C", NULL },
-			{ 0x2C, "SRA H"		, 2, 2, 2, "Z00C", NULL },
-			{ 0x2D, "SRA L"		, 2, 2, 2, "Z00C", NULL },
-			{ 0x2E, "SRA (HL)"	, 2, 4, 4, "Z00C", NULL },
-			{ 0x2F, "SRA A"		, 2, 2, 2, "Z00C", NULL },
+			{ 0x00, "RLC B"		, 2, 2, 2, "Z00C", exe_rlc_b },
+			{ 0x01, "RLC C"		, 2, 2, 2, "Z00C", exe_rlc_c },
+			{ 0x02, "RLC D"		, 2, 2, 2, "Z00C", exe_rlc_d },
+			{ 0x03, "RLC E"		, 2, 2, 2, "Z00C", exe_rlc_e },
+			{ 0x04, "RLC H"		, 2, 2, 2, "Z00C", exe_rlc_h },
+			{ 0x05, "RLC L"		, 2, 2, 2, "Z00C", exe_rlc_l },
+			{ 0x06, "RLC (HL)"	, 2, 4, 4, "Z00C", exe_rlc_addr_hl },
+			{ 0x07, "RLC A"		, 2, 2, 2, "Z00C", exe_rlc_a },
+			{ 0x08, "RRC B"		, 2, 2, 2, "Z00C", exe_rrc_b },
+			{ 0x09, "RRC C"		, 2, 2, 2, "Z00C", exe_rrc_c },
+			{ 0x0A, "RRC D"		, 2, 2, 2, "Z00C", exe_rrc_d },
+			{ 0x0B, "RRC E"		, 2, 2, 2, "Z00C", exe_rrc_e },
+			{ 0x0C, "RRC H"		, 2, 2, 2, "Z00C", exe_rrc_h },
+			{ 0x0D, "RRC L"		, 2, 2, 2, "Z00C", exe_rrc_l },
+			{ 0x0E, "RRC (HL)"	, 2, 4, 4, "Z00C", exe_rrc_addr_hl },
+			{ 0x0F, "RRC A"		, 2, 2, 2, "Z00C", exe_rrc_a },
+			{ 0x10, "RL B"		, 2, 2, 2, "Z00C", exe_rl_b },
+			{ 0x11, "RL C"		, 2, 2, 2, "Z00C", exe_rl_c },
+			{ 0x12, "RL D"		, 2, 2, 2, "Z00C", exe_rl_d },
+			{ 0x13, "RL E"		, 2, 2, 2, "Z00C", exe_rl_e },
+			{ 0x14, "RL H"		, 2, 2, 2, "Z00C", exe_rl_h },
+			{ 0x15, "RL L"		, 2, 2, 2, "Z00C", exe_rl_l },
+			{ 0x16, "RL (HL)"	, 2, 4, 4, "Z00C", exe_rl_addr_hl },
+			{ 0x17, "RL A"		, 2, 2, 2, "Z00C", exe_rl_a },
+			{ 0x18, "RR B"		, 2, 2, 2, "Z00C", exe_rr_b },
+			{ 0x19, "RR C"		, 2, 2, 2, "Z00C", exe_rr_c },
+			{ 0x1A, "RR D"		, 2, 2, 2, "Z00C", exe_rr_d },
+			{ 0x1B, "RR E"		, 2, 2, 2, "Z00C", exe_rr_e },
+			{ 0x1C, "RR H"		, 2, 2, 2, "Z00C", exe_rr_h },
+			{ 0x1D, "RR L"		, 2, 2, 2, "Z00C", exe_rr_l },
+			{ 0x1E, "RR (HL)"	, 2, 4, 4, "Z00C", exe_rr_addr_hl },
+			{ 0x1F, "RR A"		, 2, 2, 2, "Z00C", exe_rr_a },
+			{ 0x20, "SLA B"		, 2, 2, 2, "Z00C", exe_sla_b },
+			{ 0x21, "SLA C"		, 2, 2, 2, "Z00C", exe_sla_c },
+			{ 0x22, "SLA D"		, 2, 2, 2, "Z00C", exe_sla_d },
+			{ 0x23, "SLA E"		, 2, 2, 2, "Z00C", exe_sla_e },
+			{ 0x24, "SLA H"		, 2, 2, 2, "Z00C", exe_sla_h },
+			{ 0x25, "SLA L"		, 2, 2, 2, "Z00C", exe_sla_l },
+			{ 0x26, "SLA (HL)"	, 2, 4, 4, "Z00C", exe_sla_addr_hl },
+			{ 0x27, "SLA A"		, 2, 2, 2, "Z00C", exe_sla_a },
+			{ 0x28, "SRA B"		, 2, 2, 2, "Z00C", exe_sra_b },
+			{ 0x29, "SRA C"		, 2, 2, 2, "Z00C", exe_sra_c },
+			{ 0x2A, "SRA D"		, 2, 2, 2, "Z00C", exe_sra_d },
+			{ 0x2B, "SRA E"		, 2, 2, 2, "Z00C", exe_sra_e },
+			{ 0x2C, "SRA H"		, 2, 2, 2, "Z00C", exe_sra_h },
+			{ 0x2D, "SRA L"		, 2, 2, 2, "Z00C", exe_sra_l },
+			{ 0x2E, "SRA (HL)"	, 2, 4, 4, "Z00C", exe_sra_addr_hl },
+			{ 0x2F, "SRA A"		, 2, 2, 2, "Z00C", exe_sra_a },
 			{ 0x30, "SWAP B"	, 2, 2, 2, "Z000", exe_swap_b },
 			{ 0x31, "SWAP C"	, 2, 2, 2, "Z000", exe_swap_c },
 			{ 0x32, "SWAP D"	, 2, 2, 2, "Z000", exe_swap_d },
@@ -1060,14 +1340,14 @@ struct OPC::opcode OPC::ext_opcodes[256] = {
 			{ 0x35, "SWAP L"	, 2, 2, 2, "Z000", exe_swap_l },
 			{ 0x36, "SWAP (HL)"	, 2, 4, 4, "Z000", exe_swap_addr_hl },
 			{ 0x37, "SWAP A"	, 2, 2, 2, "Z000", exe_swap_a },
-			{ 0x38, "SRL B"		, 2, 2, 2, "Z00C", NULL },
-			{ 0x39, "SRL C"		, 2, 2, 2, "Z00C", NULL },
-			{ 0x3A, "SRL D"		, 2, 2, 2, "Z00C", NULL },
-			{ 0x3B, "SRL E"		, 2, 2, 2, "Z00C", NULL },
-			{ 0x3C, "SRL H"		, 2, 2, 2, "Z00C", NULL },
-			{ 0x3D, "SRL L"		, 2, 2, 2, "Z00C", NULL },
-			{ 0x3E, "SRL (HL)"	, 2, 4, 4, "Z00C", NULL },
-			{ 0x3F, "SRL A"		, 2, 2, 2, "Z00C", NULL },
+			{ 0x38, "SRL B"		, 2, 2, 2, "Z00C", exe_srl_b },
+			{ 0x39, "SRL C"		, 2, 2, 2, "Z00C", exe_srl_c },
+			{ 0x3A, "SRL D"		, 2, 2, 2, "Z00C", exe_srl_d },
+			{ 0x3B, "SRL E"		, 2, 2, 2, "Z00C", exe_srl_e },
+			{ 0x3C, "SRL H"		, 2, 2, 2, "Z00C", exe_srl_h },
+			{ 0x3D, "SRL L"		, 2, 2, 2, "Z00C", exe_srl_l },
+			{ 0x3E, "SRL (HL)"	, 2, 4, 4, "Z00C", exe_srl_addr_hl },
+			{ 0x3F, "SRL A"		, 2, 2, 2, "Z00C", exe_srl_a },
 			{ 0x40, "BIT 0,B"	, 2, 2, 2, "Z01-", exe_test_0_b },
 			{ 0x41, "BIT 0,C"	, 2, 2, 2, "Z01-", exe_test_0_c },
 			{ 0x42, "BIT 0,D"	, 2, 2, 2, "Z01-", exe_test_0_d },
