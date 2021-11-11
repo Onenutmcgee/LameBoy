@@ -8,6 +8,14 @@ namespace OPC
 	bool exe_nop(CPU* cp);
 	bool exe_di(CPU* cp);
 	bool exe_ei(CPU* cp);
+	bool exe_daa(CPU* cp);
+
+	bool exe_rlca(CPU* cp);
+	bool exe_rrca(CPU* cp);
+	bool exe_rla(CPU* cp);
+	bool exe_rra(CPU* cp);
+	bool exe_scf(CPU* cp);
+	bool exe_ccf(CPU* cp);
 
 	bool exe_push_bc(CPU* cp);
 	bool exe_pop_bc(CPU* cp);
@@ -153,6 +161,11 @@ namespace OPC
 	bool exe_ld_de_u16(CPU* cp);
 	bool exe_ld_sp_u16(CPU* cp);
 
+	bool exe_ld_u16_addr_sp(CPU* cp);
+	bool exe_ld_sp_hl(CPU* cp);
+	bool exe_ld_hl_sp_i8(CPU* cp);
+	bool exe_add_sp_i8(CPU* cp);
+
 	// ALU
 	bool exe_cpl_a(CPU* cp);
 	 
@@ -260,6 +273,7 @@ namespace OPC
 	bool exe_inc_de(CPU* cp);
 	bool exe_inc_hl(CPU* cp);
 	bool exe_inc_sp(CPU* cp);
+	bool exe_inc_addr_hl(CPU* cp);
 
 	// DEC
 	bool exe_dec_a(CPU* cp);
@@ -273,6 +287,7 @@ namespace OPC
 	bool exe_dec_de(CPU* cp);
 	bool exe_dec_hl(CPU* cp);
 	bool exe_dec_sp(CPU* cp);
+	bool exe_dec_addr_hl(CPU* cp);
 
 	// EXTENDED OPCODES
 

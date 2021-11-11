@@ -5,6 +5,49 @@ bool CPU::nop()
 	return false;
 }
 
+// best explanation for daa: https://ehaskins.com/2018-01-30%20Z80%20DAA/
+bool CPU::daa()
+{
+	int res = reg.a;
+
+	if (TestFlag(FLAG_N))
+	{ // the last operation was subtraction
+		if (TestFlag(FLAG_H))
+		{
+			res = (res - 0x06) & 0xFF;
+		}
+
+		if (TestFlag(FLAG_C))
+		{
+			res -= 0x60;
+		}
+	}
+	else
+	{ // the last operation was not subtraction
+		if (TestFlag(FLAG_H) || (res & 0x0f) > 0x09)
+		{
+			res += 0x06;
+		}
+
+		if (TestFlag(FLAG_C) || (res > 0x9F))
+		{
+			res += 0x60;
+		}
+	}
+
+	if ((res & 0xFF) == 0)
+		SetFlag(FLAG_Z);
+	else
+		ClearFlag(FLAG_Z);
+
+	ClearFlag(FLAG_H);
+
+	if ((res & 0x100) == 0x100)
+		SetFlag(FLAG_C);
+
+	return false;
+}
+
 bool CPU::push_reg(WORD val)
 {
 	BYTE upper = (BYTE)((val & 0xFF00) >> 8);
@@ -406,6 +449,35 @@ bool CPU::ld_immediate_u16_dest(WORD* dest)
 	return false;
 }
 
+bool CPU::ld_sp_into_immediate_u16_addr()
+{
+	WORD val = FetchNextImmediateWord();
+	_mem->WriteWord(val, reg.sp);
+	return false;
+}
+
+bool CPU::ld_hl_into_sp()
+{
+	reg.sp = reg.hl;
+	return false;
+}
+
+bool CPU::ld_sp_with_immidiate_i8_into_hl()
+{
+	SIGNED_BYTE val = _mem->ReadSignedByte(reg.pc);
+	reg.pc++;
+
+	reg.f = 0x00;
+
+	if ((reg.sp & 0x0f) + (val & 0x0f) > 0x0f)
+		SetFlag(FLAG_H);
+
+	if ((reg.sp & 0xff) + (val & 0xff) > 0xff)
+		SetFlag(FLAG_C);
+
+	return false;
+}
+
 bool CPU::ld_immediate_u8_dest(BYTE* dest)
 {
 	BYTE val = FetchNextImmediateByte();
@@ -587,6 +659,28 @@ bool CPU::inc_reg(BYTE* regAddr)
 	return false;
 }
 
+bool CPU::inc_addr(WORD addr)
+{
+	BYTE val = _mem->ReadByte(addr);
+
+	inc_reg(&val);
+
+	_mem->WriteByte(addr, val);
+
+	return false;
+}
+
+bool CPU::dec_addr(WORD addr)
+{
+	BYTE val = _mem->ReadByte(addr);
+
+	dec_reg(&val);
+
+	_mem->WriteByte(addr, val);
+
+	return false;
+}
+
 bool CPU::add_hl(WORD val)
 {
 	WORD oldhl = reg.hl;
@@ -599,6 +693,22 @@ bool CPU::add_hl(WORD val)
 		SetFlag(FLAG_H);
 
 	if (result > 0xFFFF)
+		SetFlag(FLAG_C);
+
+	return false;
+}
+
+bool CPU::add_sp_i8()
+{
+	SIGNED_BYTE val = _mem->ReadSignedByte(reg.pc);
+	reg.pc++;
+
+	reg.f = 0x00;
+
+	if ((reg.sp & 0x0f) + (val & 0x0f) > 0x0f)
+		SetFlag(FLAG_H);
+
+	if ((reg.sp & 0xff) + (val & 0xff) > 0xff)
 		SetFlag(FLAG_C);
 
 	return false;
@@ -838,5 +948,18 @@ bool CPU::srl_addr(WORD address)
 	srl_reg(&val);
 	_mem->WriteByte(address, val);
 
+	return false;
+}
+
+bool CPU::ccf()
+{
+	BYTE t = (1 << FLAG_C);
+	reg.f ^= t;
+	return false;
+}
+
+bool CPU::scf()
+{
+	SetFlag(FLAG_C);
 	return false;
 }

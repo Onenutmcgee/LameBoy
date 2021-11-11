@@ -18,7 +18,7 @@ public:
 	SIGNED_WORD ReadSignedWord(WORD);
 
 	void WriteByte(WORD, BYTE);
-
+	void WriteWord(WORD address, WORD value);
 
 private:
 	const WORD VRAM_OFFSET		= 0x8000;

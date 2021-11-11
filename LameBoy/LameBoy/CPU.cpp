@@ -90,7 +90,6 @@ OPC::opcode CPU::PeekNextOpcode()
 	return OPC::opcodes[op];
 }
 
-
 void CPU::SetFlag(BYTE flag)
 {
 	reg.f |= (1 << flag);

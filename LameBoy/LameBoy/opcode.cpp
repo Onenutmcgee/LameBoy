@@ -18,6 +18,49 @@ bool OPC::exe_ei(CPU* cp)
 	return cp->set_interrupts_enabled(true);
 }
 
+bool OPC::exe_daa(CPU* cp)
+{
+	return cp->daa();
+}
+
+bool OPC::exe_rlca(CPU* cp)
+{
+	bool r = cp->rlc_reg(&cp->reg.a);
+	cp->reg.f &= 0x1F;
+	return r;
+}
+
+bool OPC::exe_rla(CPU* cp)
+{
+	bool r = cp->rl_reg(&cp->reg.a);
+	cp->reg.f &= 0x1F;
+	return r;
+}
+
+bool OPC::exe_rrca(CPU* cp)
+{
+	bool r = cp->rrc_reg(&cp->reg.a);
+	cp->reg.f &= 0x1F;
+	return r;
+}
+
+bool OPC::exe_rra(CPU* cp)
+{
+	bool r = cp->rr_reg(&cp->reg.a);
+	cp->reg.f &= 0x1F;
+	return r;
+}
+
+bool OPC::exe_scf(CPU* cp)
+{
+	return cp->scf();
+}
+
+bool OPC::exe_ccf(CPU* cp)
+{
+	return cp->ccf();
+}
+
 bool OPC::exe_push_bc(CPU* cp)
 {
 	return cp->push_reg(cp->reg.bc);
@@ -634,6 +677,26 @@ bool OPC::exe_ld_sp_u16(CPU* cp)
 	return cp->ld_immediate_u16_dest(&cp->reg.sp);
 }
 
+bool OPC::exe_ld_u16_addr_sp(CPU* cp)
+{
+	return cp->ld_sp_into_immediate_u16_addr();
+}
+
+bool OPC::exe_ld_sp_hl(CPU* cp)
+{
+	return cp->ld_hl_into_sp();
+}
+
+bool OPC::exe_ld_hl_sp_i8(CPU* cp)
+{
+	return cp->ld_sp_with_immidiate_i8_into_hl();
+}
+
+bool OPC::exe_add_sp_i8(CPU* cp)
+{
+	return cp->add_sp_i8();
+}
+
 // ALU
 bool OPC::exe_cpl_a(CPU* cp)
 {
@@ -1084,6 +1147,11 @@ bool OPC::exe_inc_sp(CPU* cp)
 	return cp->inc_reg(&cp->reg.sp);
 }
 
+bool OPC::exe_inc_addr_hl(CPU* cp)
+{
+	return cp->inc_addr(cp->reg.hl);
+}
+
 // DEC
 bool OPC::exe_dec_a(CPU* cp)
 {
@@ -1140,6 +1208,11 @@ bool OPC::exe_dec_sp(CPU* cp)
 	return cp->dec_reg(&cp->reg.sp);
 }
 
+bool OPC::exe_dec_addr_hl(CPU* cp)
+{
+	return cp->dec_addr(cp->reg.hl);
+}
+
 struct OPC::opcode OPC::opcodes[256] = {
 			{ 0x00, "NOP"		, 1, 1, 1, "----", exe_nop},
 			{ 0x01, "LD BC,u16"	, 3, 3, 3, "----", exe_ld_bc_u16},
@@ -1148,15 +1221,15 @@ struct OPC::opcode OPC::opcodes[256] = {
 			{ 0x04, "INC B"		, 1, 1, 1, "Z0H-", exe_inc_b},
 			{ 0x05, "DEC B"		, 1, 1, 1, "Z1H-", exe_dec_b},
 			{ 0x06, "LD B,u8"	, 2, 2, 2, "----", exe_ld_b_u8 },
-			{ 0x07, "RLCA"		, 1, 1, 1, "000C"},
-			{ 0x08, "LD (u16),SP",3, 5, 5, "----"},
+			{ 0x07, "RLCA"		, 1, 1, 1, "000C", exe_rlca},
+			{ 0x08, "LD (u16),SP",3, 5, 5, "----", exe_ld_u16_addr_sp },
 			{ 0x09, "ADD HL,BC"	, 1, 2, 2, "-0HC", exe_add_hl_bc},
 			{ 0x0A, "LD A,(BC)"	, 1, 2, 2, "----", exe_ld_a_addr_bc},
 			{ 0x0B, "DEC BC"	, 1, 2, 2, "----", exe_dec_bc},
 			{ 0x0C, "INC C"		, 1, 1, 1, "Z0H-", exe_inc_c},
 			{ 0x0D, "DEC C"		, 1, 1, 1, "Z1H-", exe_dec_c},
 			{ 0x0E, "LD C,u8"	, 2, 2, 2, "----", exe_ld_c_u8},
-			{ 0x0F, "RRCA"		, 1, 1, 1, "000C"},
+			{ 0x0F, "RRCA"		, 1, 1, 1, "000C", exe_rrca},
 			{ 0x10, "STOP"		, 2, 1, 1, "----"},
 			{ 0x11, "LD DE,u16"	, 3, 3, 3, "----", exe_ld_de_u16},
 			{ 0x12, "LD (DE),A"	, 1, 2, 2, "----", exe_ld_de_a },
@@ -1164,7 +1237,7 @@ struct OPC::opcode OPC::opcodes[256] = {
 			{ 0x14, "INC D"		, 1, 1, 1, "Z0H-", exe_inc_d},
 			{ 0x15, "DEC D"		, 1, 1, 1, "Z1H-", exe_dec_d},
 			{ 0x16, "LD D,u8"	, 2, 2, 2, "----", exe_ld_d_u8},
-			{ 0x17, "RLA"		, 1, 1, 1, "000C"},
+			{ 0x17, "RLA"		, 1, 1, 1, "000C", exe_rla},
 			{ 0x18, "JR i8"		, 2, 3, 3, "----", exe_jr_i8 },
 			{ 0x19, "ADD HL,DE"	, 1, 2, 2, "-0HC", exe_add_hl_de },
 			{ 0x1A, "LD A,(DE)"	, 1, 2, 2, "----", exe_ld_a_addr_de},
@@ -1172,7 +1245,7 @@ struct OPC::opcode OPC::opcodes[256] = {
 			{ 0x1C, "INC E"		, 1, 1, 1, "Z0H-", exe_inc_e},
 			{ 0x1D, "DEC E"		, 1, 1, 1, "Z1H-", exe_dec_e},
 			{ 0x1E, "LD E,u8"	, 2, 2, 2, "----", exe_ld_e_u8},
-			{ 0x1F, "RRA"		, 1, 1, 1, "000C"},
+			{ 0x1F, "RRA"		, 1, 1, 1, "000C", exe_rra},
 			{ 0x20, "JR NZ,i8"	, 2, 2, 3, "----", exe_jr_nz_i8 },
 			{ 0x21, "LD HL,u16"	, 3, 3, 3, "----", exe_ld_hl_u16},
 			{ 0x22, "LD (HL+),A", 1, 2, 2, "----", exe_ldi_hl_a},
@@ -1180,7 +1253,7 @@ struct OPC::opcode OPC::opcodes[256] = {
 			{ 0x24, "INC H"		, 1, 1, 1, "Z0H-", exe_inc_h},
 			{ 0x25, "DEC H"		, 1, 1, 1, "Z1H-", exe_dec_h},
 			{ 0x26, "LD H,u8"	, 2, 2, 2, "----", exe_ld_h_u8},
-			{ 0x27, "DAA"		, 1, 1, 1, "Z-0C"},
+			{ 0x27, "DAA"		, 1, 1, 1, "Z-0C", exe_daa},
 			{ 0x28, "JR Z,i8"	, 2, 2, 3, "----", exe_jr_z_i8},
 			{ 0x29, "ADD HL,HL"	, 1, 2, 2, "-0HC", exe_add_hl_hl },
 			{ 0x2A, "LD A,(HL+)", 1, 2, 2, "----", exe_ld_a_addr_hl_inc},
@@ -1193,10 +1266,10 @@ struct OPC::opcode OPC::opcodes[256] = {
 			{ 0x31, "LD SP,u16"	, 3, 3, 3, "----", exe_ld_sp_u16},
 			{ 0x32, "LD (HL-),A", 1, 2, 2, "----", exe_ldd_hl_a},
 			{ 0x33, "INC SP"	, 1, 2, 2, "----", exe_inc_sp},
-			{ 0x34, "INC (HL)"	, 1, 3, 3, "Z0H-"},
-			{ 0x35, "DEC (HL)"	, 1, 3, 3, "Z1H-"},
+			{ 0x34, "INC (HL)"	, 1, 3, 3, "Z0H-", exe_inc_addr_hl},
+			{ 0x35, "DEC (HL)"	, 1, 3, 3, "Z1H-", exe_dec_addr_hl},
 			{ 0x36, "LD (HL),u8", 2, 3, 3, "----", exe_ld_addr_hl_u8 },
-			{ 0x37, "SCF"		, 1, 1, 1, "-001"},
+			{ 0x37, "SCF"		, 1, 1, 1, "-001", exe_scf},
 			{ 0x38, "JR C,i8"	, 2, 2, 3, "----", exe_jr_c_i8},
 			{ 0x39, "ADD HL,SP"	, 1, 2, 2, "-0HC", exe_add_hl_sp },
 			{ 0x3A, "LD A,(HL-)", 1, 2, 2, "----", exe_ld_a_addr_hl_dec},
@@ -1204,7 +1277,7 @@ struct OPC::opcode OPC::opcodes[256] = {
 			{ 0x3C, "INC A"		, 1, 1, 1, "Z0H-", exe_inc_a},
 			{ 0x3D, "DEC A"		, 1, 1, 1, "Z1H-", exe_dec_a},
 			{ 0x3E, "LD A,u8"	, 2, 2, 2, "----", exe_ld_a_u8},
-			{ 0x3F, "CCF"		, 1, 1, 1, "-00C"},
+			{ 0x3F, "CCF"		, 1, 1, 1, "-00C", exe_ccf},
 			{ 0x40, "LD B,B"	, 1, 1, 1, "----", exe_nop},
 			{ 0x41, "LD B,C"	, 1, 1, 1, "----", exe_ld_b_c },
 			{ 0x42, "LD B,D"	, 1, 1, 1, "----", exe_ld_b_d },
@@ -1373,7 +1446,7 @@ struct OPC::opcode OPC::opcodes[256] = {
 			{ 0xE5, "PUSH HL"	, 1, 4, 4, "----", exe_push_hl },
 			{ 0xE6, "AND A,u8"	, 2, 2, 2, "Z010", exe_and_a_u8 },
 			{ 0xE7, "RST 20h"	, 1, 4, 4, "----", exe_rst_20 },
-			{ 0xE8, "ADD SP,i8"	, 2, 4, 4, "00HC"},
+			{ 0xE8, "ADD SP,i8"	, 2, 4, 4, "00HC", exe_add_sp_i8},
 			{ 0xE9, "JP HL"		, 1, 1, 1, "----", exe_jp_hl },
 			{ 0xEA, "LD (u16),A", 3, 4, 4, "----", exe_ld_immediate_u16_a },
 			{ 0xEB, "UNUSED"	, 0, 0, 0, "----", NOUSE },
@@ -1389,8 +1462,8 @@ struct OPC::opcode OPC::opcodes[256] = {
 			{ 0xF5, "PUSH AF"	, 1, 4, 4, "----", exe_push_af },
 			{ 0xF6, "OR A,u8"	, 2, 2, 2, "Z000", exe_or_a_u8 },
 			{ 0xF7, "RST 30h"	, 1, 4, 4, "----", exe_rst_30 },
-			{ 0xF8, "LD HL,SP+i8",2, 3, 3, "00HC"},
-			{ 0xF9, "LD SP,HL"	, 1, 2, 2, "----"},
+			{ 0xF8, "LD HL,SP+i8",2, 3, 3, "00HC", exe_ld_hl_sp_i8 },
+			{ 0xF9, "LD SP,HL"	, 1, 2, 2, "----", exe_ld_sp_hl },
 			{ 0xFA, "LD A,(u16)", 3, 4, 4, "----", exe_ld_a_addr_u16 },
 			{ 0xFB, "EI"		, 1, 1, 1, "----", exe_ei},
 			{ 0xFC, "UNUSED"	, 0, 0, 0, "----", NOUSE },

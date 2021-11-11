@@ -87,6 +87,12 @@ WORD MemoryManager::ReadWord(WORD address)
 	return val;
 }
 
+void MemoryManager::WriteWord(WORD address, WORD value)
+{
+	WriteByte(address, (BYTE)(value & 0x00FF));
+	WriteByte(address + 1, (BYTE)((value & 0xFF00) >> 8));
+}
+
 SIGNED_WORD MemoryManager::ReadSignedWord(WORD address)
 {
 	return (SIGNED_WORD)ReadWord(address);

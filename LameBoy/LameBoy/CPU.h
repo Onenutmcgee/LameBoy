@@ -23,6 +23,9 @@ public:
 	OPC::opcode PeekNextOpcode();
 	
 	bool nop();
+	bool daa();
+	bool scf();
+	bool ccf();
 	bool set_interrupts_enabled(bool);
 	bool push_reg(WORD reg);
 	bool pop_reg(WORD* reg);
@@ -52,6 +55,8 @@ public:
 	bool and_a_immediate_u8();
 	bool dec_reg(BYTE*);
 	bool inc_reg(BYTE*);
+	bool dec_addr(WORD);
+	bool inc_addr(WORD);
 	bool sub_a_val(BYTE val);
 	bool sub_a_addr(WORD address);
 	bool sub_a_immediate_u8();
@@ -76,9 +81,13 @@ public:
 	bool dec_reg(WORD*);
 	bool inc_reg(WORD*);
 	bool add_hl(WORD val);
+	bool add_sp_i8();
 
 	// 16 bit loads
 	bool ld_immediate_u16_dest(WORD*);
+	bool ld_sp_into_immediate_u16_addr();
+	bool ld_hl_into_sp();
+	bool ld_sp_with_immidiate_i8_into_hl();
 
 	// 8 bit loads
 	bool ld_immediate_u8_dest(BYTE*);
